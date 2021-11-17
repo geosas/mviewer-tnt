@@ -1,0 +1,115 @@
+<ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#h_simfen" aria-controls="profile" role="tab" data-toggle="tab"><span i18n="Accueil">Accueil</span></a></li>
+    <li role="presentation"><a href="#h_aide" aria-controls="messages" role="tab" data-toggle="tab"><span i18n="Mode d'emploi">Mode d'emploi</span></a></li>
+    <li role="presentation"><a href="#h_modelisation" aria-controls="profile" role="tab" data-toggle="tab"><span i18n="Principes de modélisation hydrologique">Principes de modélisation hydrologique</a></li>
+    <li role="presentation"><a href="#h_reference" aria-controls="profile" role="tab" data-toggle="tab"><span i18n="Références">Références</span></a></li>
+    <li role="presentation"><a href="#h_credits" aria-controls="settings" role="tab" data-toggle="tab"><span i18n="Crédits">Crédits</span></a></li>
+    <li role="presentation"><a href="#h_disclaimer" aria-controls="settings" role="tab" data-toggle="tab"><span i18n="Clause de non responsabilité">Clause de non responsabilité</span></a></li>
+</ul>
+
+<!-- Tab panes -->
+
+<div class="tab-content">
+
+    <div role="tabpanel" class="tab-pane active" id="h_simfen">
+
+        <h4><span i18n="Bienvenue dans l'interface SIMFEN">Bienvenue dans l'interface de TNT2</span></h4>
+
+        <p><span i18n="Intro">
+            Cette interface a pour objectif de mettre à disposition un service interopérable de modélisation des flux de nitrates</span>
+        </p>
+        <p>
+            Rapide prise en main (à voir en plein écran):
+        </p>
+        <video width="640" height="330" controls>
+            <source src="/apps/tnt/data/presentation.mp4" type="video/mp4">
+            <a href="/apps/tnt/data/presentation.mp4" target="_blank">
+                Si la vidéo ne s'affiche pas vous pouvez la télécharger ici
+              </a>
+        </video>
+        <p>
+            Pour plus de détail voir l'onglet mode d'emploi
+        </p>
+    </div>
+
+    <div role="tabpanel" class="tab-pane" id="h_aide">
+        <h4>Guide en image :</h4>
+        <button type="button"  class="btn btn-large btn-success lang"  onclick="startIntro()">
+            lancer le guide
+        </button>
+    </div>
+
+    <div role="tabpanel" class="tab-pane" id="h_modelisation">
+      <h4><span i18n="panelOutilModelisation2">Principe modélisation</span></h4>
+
+  </div>
+
+  <div role="tabpanel" class="tab-pane" id="h_reference">
+      <h4><span i18n="Références">Références</span></h4>
+    </div>
+
+  <div role="tabpanel" class="tab-pane" id="h_credits">
+      <h4><span i18n="Crédits">Crédits</span></h4>
+
+      <p><span i18n="panelCredits4">L'interface du service s'appuie sur le Mviewer développé par GéoBretagne.</span>
+      <a href="http://mviewerdoc.readthedocs.io/fr/latest/" target="_blank"><span i18n="panelCredits5">Lien vers la documentation du Mviewer</span></a>
+      </p>
+      <p><span i18n="panelCredits6">Le service WPS MNTSurf est utilisé pour calculer des variables intermédiaires.</span>
+          <a href="http://geowww.agrocampus-ouest.fr/geonetwork/apps/georchestra/?uuid=2904d91f-4957-4921-a8c8-1ab6c19c6ec2" target="_blank"><span i18n="panelCredits7">Lien vers la métadonnées de service de MNTSurf</span></a>
+      </p>
+      <p><span i18n="panelCredits8">Le service emploie des données de la banque hydro (Origine des données : HYDRO-MEDDE/DE).</span></p>
+  </div>
+  <div role="tabpanel" class="tab-pane" id="h_disclaimer">
+  <h4><span i18n="Clause de non responsabilité">Clause de non responsabilité</span></h4>
+  <p><span i18n="panelDisclaimer">
+      Les données sont issues d'une simulation qui présente des incertitudes non quantifiables précisément.
+      En conséquence, les utilisateurs du service interprètent et réutilisent les données obtenues sous leur responsabilité
+      pleine et entière, sans recours possible contre le fournisseur dont la responsabilité ne saurait être engagée du fait
+      d’un dommage résultant directement ou indirectement de l’interprétation et l’utilisation de ces données.</span>
+  </p>
+  </div>
+</div>
+
+<script>
+
+var starter
+
+function nextIntro(){
+
+    if (starter==2){
+        $("#btn_menu").append('<button id="btn_tuto_prev" type="button"  class="btn btn-large"  onclick="previousIntro()">Précédent</button>')
+    }
+
+    else if (starter==19){
+        $("#btn_tuto").remove()
+    }
+
+    $("#slide_tuto").attr("src", '/apps/tnt/data/tuto/'+starter.toString()+'.png');
+    starter+=1
+}
+function previousIntro(){
+    if (starter ==20){$("#btn_menu").append('<button id="btn_tuto" type="button"  class="btn btn-large btn-success"  onclick="nextIntro()">Suivant</button>')
+    }
+
+
+
+    starter+=-2
+    if (starter==1){
+        $("#btn_tuto_prev").remove()
+    }
+    $("#slide_tuto").attr("src", '/apps/tnt/data/tuto/'+starter.toString()+'.png');
+    starter+=1
+}
+
+function startIntro() {
+    starter=1
+    Swal.fire({
+        width:'1300px',
+        html:['<div id="btn_menu"><img id="slide_tuto" src="/apps/tnt/data/tuto/'+starter.toString()+'.png" alt="etape 1" height="660px%" width="1280px" >',
+        '<button id="btn_tuto" type="button"  class="btn btn-large btn-success"  onclick="nextIntro()">Suivant</button></div>'].join(''),
+        confirmButtonText: `Quitter tutoriel`
+    })
+    starter+=1
+}
+
+</script>

@@ -1,0 +1,61 @@
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src="https://unpkg.com/jsts@2.0.1/dist/jsts.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2"></script>
+
+
+<div class="row">
+      <div class="col-md-12">
+            <div>
+                  <label class="input_long">Utilisateur<input type="text" id="nom_createur" name="nom_createur" value="user" size="4"></label>
+                  <label  class="input_long">Projet<input type="text" id="identifiantSimulation" name="identifiantSimulation" placeholder="simulation" size="6" ></label>
+            </div>
+
+            <b>Définition de la zone d'étude</b>
+            <div class="custom-control custom-switch">
+                  <input type="checkbox" class="custom-control-input" id="customSwitches_exu" onclick="mviewer.customControls.fluxExu.getOutlets();">
+                  <label class="custom-control-label" for="customSwitches_exu" >Afficher les exutoires sur la carte</label>
+            </div>
+            Sélectionner une entité:<br>
+            <input type="checkbox" id="bv" name="bv" checked onclick="mviewer.customControls.fluxExu.check_bv_baie('bv');">
+            <label for="bv" >Bassin versant</label>
+            <input type="checkbox" id="baie" name="baie" onclick="mviewer.customControls.fluxExu.check_bv_baie('baie');">
+            <label for="baie">Baie</label><br>
+            <label>Surface des sbv (ha)
+            <input type="text" id="seuil_bv" name="seuil_bv" value="500" size="1">
+            </label>
+            <button id="get_bv" class='btn_cible' onclick="mviewer.customControls.fluxExu.getExu();" >
+                  Cibler
+            </button>
+      <div>
+            <label >Résolutions des rasters en sortie: <br><input type="text" id="resolution" name="resolution" value="20" size="1"></label>
+      </div>
+      <button id="get_mnt" class='btn_vert' onclick="mviewer.customControls.fluxExu.getDEM();">
+            Valider
+      </button>
+      <button id="return" class='btn_reint' onclick="mviewer.customControls.fluxExu.restart();">
+            Réinitialiser
+      </button>
+
+      <div> <!--parametrage -->
+      <br><b>Paramétrage des variables</b><br>
+      Sélectionner chacune des thématiques ci-dessous pour accéder aux paramètres des variables:
+      <br>
+      <button id='btn_sol' class='btn_param' onclick="mviewer.customControls.fluxExu.fitSol();">
+            Caractéristique des sols
+      </button>
+      <button id='btn_dfa' class='btn_param' onclick="mviewer.customControls.fluxExu.affCheptel();">
+            DFA
+      </button>
+      <button id="btn_rpg" class='btn_param' onclick="mviewer.customControls.fluxExu.plot_rpg();">
+            RPG &amp; Rotation
+      </button>
+      <button id='btn_station' class='btn_param' onclick="mviewer.customControls.fluxExu.qualityStation();">
+            Station qualité
+      </button>
+
+      </div><br>
+      <button id="get_ref" class='btn_vert' onclick="mviewer.customControls.fluxExu.getURL();">
+            Créer le référentiel
+      </button>
+      </div>
+</div>
