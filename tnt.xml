@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE simfen [
-  <!ENTITY path "/apps/tnt-dev">
+  <!ENTITY path "apps/mviewer-tnt">
 ]>
 <config>
     <application
@@ -10,7 +10,7 @@
         help="&path;/tnt_help.html"
         style="&path;/css/simfen.css"
         exportpng="false"
-        showhelp="true"
+        showhelp="false"
         coordinates="false"
         measuretools="false"
         togglealllayersfromtheme="false">
