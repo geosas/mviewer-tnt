@@ -5,8 +5,8 @@
 <config>
     <application
         lang='fr'
-	    title="Portail cartographique du projet TNT"
-        logo=""
+	    title="MétaTNT"
+        logo="&path;/img/TNT_logoNavbar.svg"
         help="&path;/tnt_help.html"
         style="&path;/css/tnt-theme.css"
         exportpng="false"
@@ -27,8 +27,7 @@
 
     </baselayers>
     <themes mini="false">
-        <theme name="TNT" collapsed="false" id="simfen" icon="fas fa-tint">
-
+    
             <!-- couche d'initialisation qui se supprime juste après-->
             <layer id="initSimfen" name="Resfresh page, not fully loaded, press F5" visible="true" queryable="false"
                 type="customlayer" opacity="0.5" legendurl="img/blank.gif"
@@ -37,7 +36,8 @@
                 expanded="false">
             </layer>
             <!-- couche d'initialisation qui se supprime juste après-->
-            <group name="Fonctions" id="Fonctions">
+
+        <theme name="Modules / Services" collapsed="false" id="module" icon="fas fa-arrow-right">
                 <layer id="fluxExu" name="Référenciel" visible="true" queryable="false"
                     type="customlayer" opacity="1" legendurl="img/blank.gif"
                     url="&path;/customlayers/fluxExu.js"
@@ -57,8 +57,8 @@
                     customcontrol="true" customcontrolpath="&path;/customcontrols/"
                     expanded="true">
 		        </layer>
-			</group>
-            <group name="Couche : Réseaux" id="Réseaux">
+        </theme>    
+        <theme name="Couches géographiques Réseaux" collapsed="true" id="geo_reseaux" icon="fas fa-arrow-right"> 
                 <layer id="bzh_rh25ha" name="Réseau hydrographique modélisé seuillé à 25 ha (MNT 50m)" visible="true"
                 tiled="true" queryable="false" infoformat="application/vnd.ogc.gml"
                 opacity="0.5" url="https://geosas.fr/geoserver/mntsurf/ows">
@@ -71,10 +71,8 @@
                 tiled="true" queryable="false" infoformat="application/vnd.ogc.gml"
                 opacity="1" url="https://services.sandre.eaufrance.fr/geo/topage?">
                 </layer>
-                            
-            </group>
-
-            <group name="Couches : Surfaces" id="Surfaces">
+        </theme> 
+        <theme name="Couches géographiques Surfaces" collapsed="true" id="geo_surfaces" icon="fas fa-arrow-right"> 
 		<layer id="exploitations_agricoles" name="Orientation technico-économique majoritaire"  visible="false" tiled="false"
                 searchable="false" queryable="true" opacity="0.8"
                 infoformat="application/vnd.ogc.gml" featurecount="1"
@@ -135,7 +133,6 @@
                     opacity="0.8"
                     url="http://services.sandre.eaufrance.fr/geo/saq">
                 </layer>
-            </group>
         </theme>
     </themes>
 </config>
