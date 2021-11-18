@@ -596,6 +596,97 @@ span.fa.mv-time-player {
 	color: white;
 }
 
+/* ---------------- PANELS TEMPLATE ---*/
+
+
+/** RIGHT **/
+
+#right-panel .carousel-inner {
+	width: auto!important;
+}
+
+#right-panel .mv-header {
+	padding-top: 70px!important;
+}
+
+#right-panel .mv-header {
+	background-color: var(--mycolor);
+	opacity: 0.9;
+	color: white;
+	font-family: var(--myfont);
+	padding: 3px;
+	/* font-size: 11px; */
+}
+
+#right-panel .mv-header h5 {
+	font-size: 1em;
+	font-weight: 500;
+	line-height: 1.5!important;
+	margin: 0;
+	padding: 10px;
+}
+
+#right-panel .close {
+	font-weight: 300!important;
+	font-size: 20px!important;
+	right: 15px!important;
+	padding-top: 6px!important;
+}
+
+#right-panel .item.active {
+	overflow-y: auto;
+	padding-bottom: 150px!important;
+}
+
+
+/* NAV */
+
+.mv-tooltip {
+	font-size: 11px;
+	opacity: 0.9;
+	font-family: var(--myfont);
+}
+
+#right-panel-selector .nav .active a {
+	border-left: var(--mycolor) 2px solid!important;
+	border: none;
+}
+
+#right-panel-selector .nav .active .fa {
+	color: var(--mycolor);
+}
+
+/* Item GML */
+
+#right-panel .item {
+    font-family: var(--myfont);
+    color: #555;
+    font-size: 13px;
+}
+
+#right-panel .item .gml-item-title {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+/* TEMPLATE Chevrons + Badge */
+
+span.badge.counter-slide {
+	font-family: var(--myfont);
+	font-weight: 400!important;
+	letter-spacing: 1px;
+}
+
+#right-panel span.counter-slide {
+	right: 255px!important;
+	background-color: var(--mycolor);
+}
+
+.carousel-control .glyphicon-chevron-left,
+.carousel-control .glyphicon-chevron-right {
+	font-size: 18px!important;
+}
+
 /*** --------- PROPRIETES SPECIFIQUES AUX MODES SIMPLIFIE, ULTRA-SIMPLIFIE & MOBILE --------- ***/
 
 /** SIMPLIFIE **/
