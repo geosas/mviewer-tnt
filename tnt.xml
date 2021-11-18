@@ -8,7 +8,7 @@
 	    title="Portail cartographique du projet TNT"
         logo=""
         help="&path;/tnt_help.html"
-        style="&path;/css/simfen.css"
+        style="&path;/css/tnt-theme.css"
         exportpng="false"
         showhelp="false"
         coordinates="false"
