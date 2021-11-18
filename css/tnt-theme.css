@@ -832,7 +832,7 @@ span.badge.counter-slide {
     max-height: 35px!important;
 }
 
-/* ---------------- PANELS TEMPLATE ---*/
+/* -- PANELS TEMPLATE --*/
 
 
 /* TEMPLATE Chevrons + Badge */
@@ -852,3 +852,21 @@ span.badge.counter-slide {
 .carousel-control .glyphicon-chevron-right {
 	font-size: 18px!important;
 }
+
+/* MODULE REFERENTIEL */
+
+/* Bloc légende */
+
+.customOptionsBloc {
+    margin: 0px 0px 10px;
+}
+
+.titleOption {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.customOptionsBloc label {
+    font-weight: 400;
+}
+
