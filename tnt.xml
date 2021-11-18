@@ -38,7 +38,7 @@
             <!-- couche d'initialisation qui se supprime juste après-->
 
         <theme name="Modules / Services" collapsed="false" id="module" icon="fas fa-arrow-right">
-                <layer id="fluxExu" name="Référenciel" visible="true" queryable="false"
+                <layer id="fluxExu" name="Référentiel" visible="true" queryable="false"
                     type="customlayer" opacity="1" legendurl="img/blank.gif"
                     url="&path;/customlayers/fluxExu.js"
                     customcontrol="true" customcontrolpath="&path;/customcontrols/"
