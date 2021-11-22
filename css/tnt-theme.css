@@ -14,6 +14,7 @@ Définition des propriétés de style CSS - TNT
 
 :root {
 	--mycolor: #00847f;
+	--mycolor2: #8bbd34b9;
 	--myfont: 'Poppins', sans-serif;
 }
 
@@ -931,7 +932,7 @@ span.badge.counter-slide {
 }
 
 .btn_vert {
-    background-color: #8bbd34b9;
+    background-color: var(--mycolor2);
     color: white;
     text-transform: uppercase;
 }
@@ -969,5 +970,119 @@ span.badge.counter-slide {
     width: 100%;
 }
 
+/* PANEL HOME */
 
+#help {
+    font-family:var(--myfont);
+}
 
+#help .logoHomeApp {
+    width: 12em;
+    margin: 0px 0px 30px;
+}
+
+/* Header */
+
+#help .modal-header .close {
+    font-size: 40px;
+    font-weight: 400;
+}
+
+#help .modal-header .modal-title {
+    display:none;
+}
+
+#help .modal-header {
+    padding: 40px 40px 0px 40px!important;
+}
+
+/* NavTab */
+
+#help .nav-tabs {
+    border-bottom: 1px solid var(--mycolor);
+}
+
+#help .nav-tabs>li.active>a{
+    color:white;
+    font-weight:500;
+    background-color:var(--mycolor);
+    border:none;
+	border-bottom:1px solid var(--mycolor);
+}
+
+#help .nav-tabs>li>a:hover{
+    color:white;
+    background-color:var(--mycolor);
+    border:none;
+	border-bottom:1px solid var(--mycolor);
+	opacity: 0.8;
+}
+
+/* Tab content */
+
+#help .tab-content {
+    padding: 20px 0px;
+}
+
+#help .tab-pane h4 {
+    color: var(--mycolor);
+    font-size: 24px;
+}
+
+#help .tab-pane {
+    font-size: 15px;
+    color: #555;
+    text-align :justify;
+}
+
+#help .btn {
+    border-radius: 20px;
+    padding: 6px 16px;
+}
+
+#help .btn:hover {
+    opacity: 0.8;
+}
+
+#help .btn-success {
+    background-color :var(--mycolor2);
+    border:none;
+}
+
+#help .btn-info {    
+    border: 1px solid var(--mycolor);
+    background: none;
+    color: var(--mycolor);
+}
+
+/* Guide pas à pas */
+
+#btn_tuto, #btn_tuto_prev {
+    border-radius: 20px;
+    padding: 6px 16px;
+	margin: 10px 5px 0px;
+}
+
+#btn_tuto_prev {
+    border: 1px solid var(--mycolor2);
+    background: none;
+    color: var(--mycolor2);
+}
+
+#btn_tuto_prev:hover {
+    background: #8bbd3445;
+}
+
+#btn_tuto {
+    background: var(--mycolor2);
+    color: white;
+    border:none;
+}
+
+#btn_tuto:hover {
+    opacity:0.8;
+}
+
+.swal2-styled {
+    border-radius: 20px!important;
+}
