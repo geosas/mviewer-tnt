@@ -102,11 +102,11 @@ mviewer.customControls.fluxExu = (function () {
 
     // Permet de gerer les requetes cross-domain
     function ajaxURL(url) {
-        // relative path
         if (url.indexOf('http') !== 0) {
             return url;
-        }
-        // same domain
+        } else if (location.host=='localhost'){
+            return url;
+        } // same domain
         else if (url.indexOf(location.protocol + '//' + location.host) === 0) {
             return url;
         } else {
