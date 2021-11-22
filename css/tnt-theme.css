@@ -596,7 +596,7 @@ span.fa.mv-time-player {
 	color: white;
 }
 
-/* ---------------- PANELS TEMPLATE ---*/
+/* -- PANELS TEMPLATE --*/
 
 
 /** RIGHT **/
@@ -686,6 +686,41 @@ span.badge.counter-slide {
 .carousel-control .glyphicon-chevron-right {
 	font-size: 18px!important;
 }
+
+/** BOTTOM-PANEL **/
+
+#bottom-panel-btn .fa-chevron-down {
+    background: var(--mycolor);
+    color:#fff;
+}
+
+#bottom-panel-btn .fa-chevron-down:hover {
+    background: #05afa8;
+    color:#fff;
+}
+
+#bottom-panel .mv-header h5{
+	font-family:var(--myfont);
+	color: var(--mycolor);
+	font-size: 14px;
+	font-weight: 600;
+}
+
+/* POP-UP ALERTE ERROR */
+
+.swal2-popup.swal2-modal {
+    font-family: var(--myfont);
+}
+
+button.swal2-confirm.swal2-styled {
+    background-color:#442f8a;
+}
+
+.swal2-icon.swal2-warning.swal2-icon-show {
+   color:#442f8a;
+   border-color:#442f8a;
+}
+
 
 /*** --------- PROPRIETES SPECIFIQUES AUX MODES SIMPLIFIE, ULTRA-SIMPLIFIE & MOBILE --------- ***/
 
