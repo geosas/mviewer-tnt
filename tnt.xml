@@ -27,7 +27,8 @@
 
     </baselayers>
     <themes mini="false">
-    
+        <theme name="TNT" collapsed="false" id="simfen" icon="fas fa-arrow-right">
+
             <!-- couche d'initialisation qui se supprime juste après-->
             <layer id="initSimfen" name="Resfresh page, not fully loaded, press F5" visible="true" queryable="false"
                 type="customlayer" opacity="0.5" legendurl="img/blank.gif"
@@ -36,9 +37,8 @@
                 expanded="false">
             </layer>
             <!-- couche d'initialisation qui se supprime juste après-->
-
-        <theme name="Modules / Services" collapsed="false" id="module" icon="fas fa-arrow-right">
-                <layer id="fluxExu" name="Référentiel" visible="true" queryable="false"
+            <group name="Fonctions" id="Fonctions">
+                <layer id="fluxExu" name="Référenciel" visible="true" queryable="false"
                     type="customlayer" opacity="1" legendurl="img/blank.gif"
                     url="&path;/customlayers/fluxExu.js"
                     customcontrol="true" customcontrolpath="&path;/customcontrols/"
@@ -57,8 +57,8 @@
                     customcontrol="true" customcontrolpath="&path;/customcontrols/"
                     expanded="true">
 		        </layer>
-        </theme>    
-        <theme name="Couches géographiques Réseaux" collapsed="true" id="geo_reseaux" icon="fas fa-arrow-right"> 
+			</group>
+            <group name="Couche : Réseaux" id="Réseaux">
                 <layer id="bzh_rh25ha" name="Réseau hydrographique modélisé seuillé à 25 ha (MNT 50m)" visible="true"
                 tiled="true" queryable="false" infoformat="application/vnd.ogc.gml"
                 opacity="0.5" url="https://geosas.fr/geoserver/mntsurf/ows">
@@ -71,8 +71,10 @@
                 tiled="true" queryable="false" infoformat="application/vnd.ogc.gml"
                 opacity="1" url="https://services.sandre.eaufrance.fr/geo/topage?">
                 </layer>
-        </theme> 
-        <theme name="Couches géographiques Surfaces" collapsed="true" id="geo_surfaces" icon="fas fa-arrow-right"> 
+                            
+            </group>
+
+            <group name="Couches : Surfaces" id="Surfaces">
 		<layer id="exploitations_agricoles" name="Orientation technico-économique majoritaire"  visible="false" tiled="false"
                 searchable="false" queryable="true" opacity="0.8"
                 infoformat="application/vnd.ogc.gml" featurecount="1"
@@ -133,6 +135,7 @@
                     opacity="0.8"
                     url="http://services.sandre.eaufrance.fr/geo/saq">
                 </layer>
+            </group>
         </theme>
     </themes>
 </config>

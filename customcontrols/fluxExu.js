@@ -378,7 +378,8 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
                                             icon: 'success',
                                             text: "Les DFA ont été ajoutées au référentiel",
                                         });
-                                        $("#btn_dfa").css("background-color","green");
+                                        $("#btn_dfa").css("background-color","var(--mycolor)");
+                                        $("#btn_dfa").css("color","white");
                                         if ($("#legendwms").children().first()) {
                                             $("#legendwms").remove();
                                             deleteLayers(["mntWms"]);
@@ -435,7 +436,8 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
                                             text: "Les caractéristiques du sol ont été ajoutées au référentiel",
                                         });
                                         solLayer.setVisible(false)
-                                        $("#btn_sol").css("background-color","green");
+                                        $("#btn_sol").css("background-color","var(--mycolor)");
+                                        $("#btn_sol").css("color","white");
                                     }
                                     if (outputTag.Data.LiteralData=='ok_rpg'){
                                         $('#rpgInput').collapse('hide')
@@ -1547,7 +1549,7 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
         fitSol: function(){
             if (_processing === false) {
                 if (dem==true){
-                    $("#btn_sol").css("border-color","green");
+                    $("#btn_sol").css("border-color","var(--mycolor)");
                     deleteLayers(["mntWms"]);
                     if ($("#legendwms").children().first()) {
                         $("#legendwms").remove();
@@ -1598,13 +1600,14 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
                     tableau+=('<td style="text-align:center"><input type="text" id="sol_'+i+'" required minlength="1" maxlength="2" value="'+geoj[i].properties.categorie+'"></td></tr>');
                     }
                     tableau+=("</tbody></table>");
-                    tableau+='<a style="color:blue;text-decoration: underline;" href="http://geowww.agrocampus-ouest.fr/metadata/Description_metadonnees.html" \
+                    tableau+='<a href="http://geowww.agrocampus-ouest.fr/metadata/Description_metadonnees.html" \
                     target="_blank"> Propriétés pédologiques - Description des champs</a>'
                     $("#graphFlowSimulated").append(tableau)
+                    $("#graphFlowSimulated").css("background-color","#ffffff");
                     $("#divPopup1").append([
                         "<div class='titre_bottom' >Caractéristiques des sols</div>",
-                        "<div>Dans le tableau, classifiez les UCS selon leurs types de matériaux dominants.",
-                        '<br><button class="btn_vert" onclick="mviewer.customControls.fluxExu.classement_sol()">Ajouter</button></div>'].join(''));
+                        "<div><i class='fas fa-arrow-right'></i> Dans le tableau, classifiez les UCS selon leurs types de matériaux dominants.",
+                        '<br><br><br><button class="btnTNT btn_vert" onclick="mviewer.customControls.fluxExu.classement_sol()"><i class="fas fa-plus-circle"></i> Ajouter</button></div>'].join(''));
                 } else { alert("MNT non généré")}
             } else { alert("process en cours, attendez")}
         },
@@ -1677,7 +1680,7 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
             if ($("#legendwms").children().first()) {
                 $("#legendwms").remove();
             }
-            $("#btn_dfa").css("border-color","green");
+            $("#btn_dfa").css("border-color","var(--mycolor)");
             cheptelLayer.setVisible(true)
             _map.removeInteraction(selection_station)
             solLayer.setVisible(false)
@@ -1695,19 +1698,20 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
 
             $("#divPopup1").append([
                 "<div class='titre_bottom' >Déclaration des flux d'azote (DFA) </div>",
-                "<div>Veuillez sélectionner sur la carte les cantons dont les données",
-                "DFA seront ajoutées au référentiel, SHIFT+CLIC : sélectionner plusieurs cantons</div>",
+                "<div><i class='fas fa-arrow-right'></i> Veuillez sélectionner sur la carte les cantons dont les données",
+                " DFA seront ajoutées au référentiel</br><i>SHIFT+CLIC : sélectionner plusieurs cantons</i></div>",
                 '<div class="custom-control custom-switch">',
                 '<input type="checkbox" checked class="custom-control-input" id="customSwitches_dfa" onclick="mviewer.customControls.fluxExu.hide_couche(\'cheptel\');">',
                 '<label class="custom-control-label" for="customSwitches_dfa" >Contour des cantons</label></div>',
                 '<div class="custom-control custom-switch">',
                 '<input type="checkbox" class="custom-control-input" id="customSwitches" onclick="mviewer.customControls.fluxExu.ocs_wms();">',
-                '<label class="custom-control-label" for="customSwitches" >Afficher l\'occupation du sol </label></div>',
-                '<button class="btn_param" onclick="mviewer.customControls.fluxExu.fitDfa1(\'m1\');">',
-                'Utiliser tous les cantons</button>',
-                '<button class="btn_vert" onclick="mviewer.customControls.fluxExu.fitDfa2();">',
-                'Ajouter la sélection</button>'].join(''));
-            $("#graphFlowSimulated").append("<i>Sélectionnez un canton sur la carte pour afficher les informations sur les flux d'azote associées</i>")
+                '<label class="custom-control-label" for="customSwitches" >Afficher l\'occupation du sol </label></div><br>',
+                '<button class="btnTNT btn_vert2" onclick="mviewer.customControls.fluxExu.fitDfa1(\'m1\');">',
+                '<i class="fas fa-plus-circle"></i> Utiliser tous les cantons</button>',
+                '<button class="btnTNT btn_vert" onclick="mviewer.customControls.fluxExu.fitDfa2();">',
+                '<i class="fas fa-plus-circle"></i> Ajouter la sélection</button>'].join(''));
+            $("#graphFlowSimulated").append("<div class='blockNoData'><img class='imgNoData' src='apps/mviewer-tnt/img/data_nocanton.svg'><p><i>Sélectionnez un canton sur la carte pour afficher les informations sur les flux d'azote associées</i></p></div>");
+            $("#graphFlowSimulated").css("background-color","#80808012");
         },
         fitDfa1: function (methode) {
             if (_processing === false) {
@@ -1749,7 +1753,7 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
                         $("#bottom-panel").toggleClass("active");
                     }
                 } else {
-                   alert("Les DFA par canton n'ont pas été générés");
+                   alert("Les DFA par canton n'ont pas été générées");
                 }
             } else {
                 // translate
@@ -1779,7 +1783,7 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
                 if (cantonSelected.length != 0){
                     mviewer.customControls.fluxExu.fitDfa1(cantonSelected)
                 } else {
-                    alert("veulliez sélectionner au moins un canton")
+                    alert("Veuillez sélectionner au moins un canton")
                 }
 
         },
@@ -1804,7 +1808,7 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
         },
         plot_rpg : function(){
 
-            $("#btn_rpg").css("border-color","green");
+            $("#btn_rpg").css("border-color","var(--mycolor)");
             if (rpg_info != undefined){
                 if ($("#bottom-panel").hasClass("")) {
                     $("#bottom-panel").toggleClass("active");
@@ -1839,7 +1843,7 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
                     "<option value='2016'>2016</option>",
                     "<option value='2015'>2015</option></select></div>",
                     "<button class='btn_vert' onclick='mviewer.customControls.fluxExu.valider_rpg()'>Valider</button>",
-                    "<div>Veuillez sélectionner un sbv, pour afficher ses statistiques</div>",].join(""));
+                    "<div>Veuillez sélectionner un sbv, pour afficher ses statistiques</div>"].join(""));
                 data=[]
                 annotations=[]
                 decal=-0.2
@@ -1917,7 +1921,8 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
             sbv_rotationLayer.setVisible(false)
             $("#bottom-panel").toggleClass("active");
 
-            $("#btn_rpg").css("background-color","green");
+            $("#btn_rpg").css("background-color","var(--mycolor)");
+            $("#btn_rpg").css("color","white");
         },
         rpg_wms: function(year_wms){
             if ($("#legendwms").children().first()) {
@@ -1928,7 +1933,7 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
         },
         qualityStation: function(){
 
-            $("#btn_station").css("border-color","green");
+            $("#btn_station").css("border-color","var(--mycolor)");
             if ($("#graphFlowSimulated").children().first()) {
                 $("#divPopup1").empty();
             }
@@ -1950,8 +1955,8 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
                 '<label class="input_long">Nombre d\'enregistrement minimum :<input type="text" id="seuil_rec" name="seuil_rec" value="10" size="4"></label>',
                 '<button style="color:white ;background-color: #2e5367;" onclick="mviewer.customControls.fluxExu.addQualityStation();">',
                 'Rechercher les stations</button>',
-                '<br><button class="btn_vert" onclick="mviewer.customControls.fluxExu.ajout_station();">',
-                'Ajouter la sélection</button>'].join(''));
+                '<br><button class="btnTNT btn_vert" onclick="mviewer.customControls.fluxExu.ajout_station();">',
+                '<i class="fas fa-plus-circle"></i> Ajouter la sélection</button>'].join(''));
             $("#graphFlowSimulated").append("<i>Sélectionnez une station sur la carte pour afficher les informations sur les flux d'azote associées</i>")
         },
         addQualityStation: function(){
@@ -2024,7 +2029,8 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
                 icon: 'success',
                 text: "Les stations qualités ont été ajoutées au référentiel",
             });
-            $("#btn_station").css("background-color","green");
+            $("#btn_station").css("background-color","var(--mycolor)");
+            $("#btn_station").css("color","white");
             referentiel=true
         },
         getURL: function () {

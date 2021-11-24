@@ -1,3 +1,4 @@
+
 @charset "UTF-8";
 
 /******
@@ -722,6 +723,10 @@ button.swal2-confirm.swal2-styled {
    border-color:#442f8a;
 }
 
+.swal2-icon.swal2-info.swal2-icon-show {
+   color:#442f8a;
+   border-color:#442f8a;
+}
 
 /*** --------- PROPRIETES SPECIFIQUES AUX MODES SIMPLIFIE, ULTRA-SIMPLIFIE & MOBILE --------- ***/
 
@@ -929,12 +934,17 @@ span.badge.counter-slide {
 .btn_cible {
     background-color: var(--mycolor);
     color: white;
+
 }
 
 .btn_vert {
     background-color: var(--mycolor2);
     color: white;
     text-transform: uppercase;
+	padding: 6px 12px;
+    border-radius: 15px;
+    border: none;
+    font-size: 12px;
 }
 
 .btn_reint {
@@ -943,6 +953,9 @@ span.badge.counter-slide {
     border: 1px solid #4c216e;
     text-transform: uppercase;
     font-weight: 600;
+	padding: 6px 12px;
+    border-radius: 15px;
+    font-size: 12px;
 }
 
 .btn_param {
@@ -951,10 +964,22 @@ span.badge.counter-slide {
     border: 1px solid var(--mycolor);
     font-weight: 500;
     margin: 0px 0px 5px 0;
+	padding: 6px 12px;
+    border-radius: 15px;
+    font-size: 12px;
 }
 
 .btn_param:hover {
     background-color: #00847f42;
+}
+
+.btn_vert2 {
+    background-color: #ffffff00;
+    color: var(--mycolor2);
+    border: 1px solid var(--mycolor2);
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-right: 5px;
 }
 
 /* Input */
@@ -968,6 +993,13 @@ span.badge.counter-slide {
 
 #projectName input {
     width: 100%;
+}
+
+/* PANEL DE CHARGEMENT */
+
+#loading-page {
+    font-family: var(--myfont) !important;
+    font-size: 14px !important;
 }
 
 /* PANEL HOME */
@@ -1085,4 +1117,287 @@ span.badge.counter-slide {
 
 .swal2-styled {
     border-radius: 20px!important;
+}
+
+
+/******** Ajouté à l'aveugle via la console **********/
+/* Param SIMFEN */
+#resultBox {
+    position: absolute;
+     display: inline-block;
+}
+
+#mouse-position {
+    width: auto;
+    position: absolute;
+    right: 6%;
+    height: 20px !important;
+    bottom: 11px;
+    color: #000000 !important;
+    background-color: rgba(255,255,255,1) !important;
+    text-align: center;
+    font-size: 16px !important;
+    font-family: 'roboto_regular', Arial, Sans-serif;
+    outline: rgba(255,255,255,0.7) solid 0px !important;
+    border: rgba(119,119,119,0) solid 0px !important;
+        border-top-color: rgba(119, 119, 119, 0) !important;
+    border-top-color: rgba(119,119,119,0) !important;
+    border-radius: 30px !important;
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+}
+
+
+.glyphicon {
+    font-family: inherit;
+}
+.glyphicon:before{
+    font-family:'Glyphicons Halflings';
+}
+
+#bottom-panel.active.extend {
+    height: 90%;
+    opacity: 1;
+}
+
+#graphFlowSimulated {
+    width: 60%;
+    margin-left: 30%;
+}
+#table_sol_div{
+    overflow-y: auto;
+    height: 270px;
+}
+#graphFlowSimulatedExtend {
+    height: 85vh;
+    width: 85vw;
+    padding-left: 1%;
+}
+
+/* PROGRESSE BAR */
+
+#timerKillProcess {
+  font-family: var(--myfont);
+  color: #555;
+  font-weight: 300;
+  text-align: center;
+  margin: 10px 0px 5px;
+}
+#processingBar {
+  height: 20px;
+  border-radius: 20px;
+  text-align: center;
+  width: 100%;
+  background-color: #00847f73 !important;
+  box-shadow: none;
+  margin: 7px 0px;
+}
+
+#progression {
+  background-color:  #00847f !important;
+}
+
+#toolsBoxPopup {
+  margin-left: 10px;
+  width: 25%;
+  position: absolute;
+  font-family: var(--myfont);
+  color: #555;
+}
+
+#processing-text {
+	text-align: center;
+	width: 100%;
+	color: white;
+	font-size: 12px;
+	position: absolute;
+	font-family: var(--myfont);
+	padding: 1px 0px;
+}
+
+/* Test Bar de chargement dans la map */
+#processingBar {
+    position: fixed;
+    top: 13%;
+    right: 5%;
+    width: 20em;
+    background-color: white;
+}
+
+#timerKillProcess {
+    position: fixed;
+    top: 10%;
+    right: 5%;
+    width: 20em;
+}
+
+/*-*/
+
+#bottom-panel-btn-extend {
+    margin-left: 50px;
+    margin-top: -17px;
+    width: 40px;
+    text-align: center;
+    line-height: 1.7em;
+    border-radius: 30px;
+    font-size: 15px;
+    position: absolute;
+    color: var(--mycolor);
+    border: 1px solid var(--mycolor);
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+#countdown {
+    font-size: 16px;
+}
+
+#dismiss {
+    position: initial;
+    margin-left: 10px;
+    font-size: 16px;
+}
+
+#dismiss:hover {
+    color: rgb(121, 121, 121);
+}
+
+.tips {
+    border: 1px solid black;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 18px;
+}
+
+.tips-number-cell {
+    width: 51px;
+}
+
+.tips-number {
+    font-size: 35px;
+}
+
+.circle {
+    width: 175px;
+    height: 175px;
+    border-radius: 50%;
+    transform: rotate(-45deg);
+    text-align: center;
+    display: inline-block;
+    margin-left: 20px;
+    margin-top: 30px;
+    border-top-right-radius: 0%;
+    /*border: 5px solid #2E5367;*/
+    position: relative;
+}
+
+.water-drop-text {
+    width: 175px;
+    height: 175px;
+    font-size: 16px !important;
+    color: white !important;
+    transform: rotate(45deg);
+    text-align: center !important;
+    vertical-align: middle !important;
+    position: relative;
+    display: inline-block;
+}
+
+.number-step {
+    font-size: 40px !important;
+}
+
+/* Panel des configurations */ 
+
+
+#bottom-panel .popup-content {
+	padding: 10px;
+  }
+
+.titre_bottom {
+	font-family: var(--myfont);
+	font-size: 20px;
+	font-weight: 500;
+	color: var(--mycolor);
+	margin: 10px 0;
+ 
+} 
+
+/* - Template Caractéristiques des sols - */
+
+#table_sol {
+	font-family: var(--myfont);
+	border: none;
+	color: #555;
+	border-bottom: 1px solid var(--mycolor);
+	margin-bottom: 10px;
+}
+
+#table_sol th {
+	background-color: #00847fc7;
+	color: white;
+	padding: 12px;
+	font-weight: 401;
+	border: none;
+}
+
+#table_sol td {
+	border: none;
+	padding: 5px 0;
+  }
+  
+  #table_sol tr:nth-child(odd) {
+	background-color: #cecece5c;
+  }
+
+  #table_sol a {
+	color: var(--mycolor) !important;
+		font-style: normal!important;
+  }
+
+  #table_sol_div a {
+	color: #555;
+	font-family: var(--myfont);
+	font-style: italic;
+  }
+
+  #table_sol input {
+	border: 1px solid var(--mycolor);
+	padding: 4px 0;
+	width: 40%;
+	text-align: center;
+	border-radius: 20px;
+	color: var(--mycolor);
+  }
+
+  /* Déclaration des flux d'Azote */
+
+  
+  #toolsBoxPopup .custom-control-label {
+	font-weight: 400;
+	margin: 0px 5px;
+  }
+
+  #toolsBoxPopup .custom-control.custom-switch {
+	margin: 10px 0px;
+  }
+
+  #graphFlowSimulated {
+	/*background-color: #80808012;*/
+	height: 270px;
+	border-radius: 5px;
+  }
+
+  .blockNoData {
+    padding: 10%;
+    text-align: center;
+    font-family: var(--myfont);
+    color: #777;
+}
+
+.imgNoData {
+    width: 40px;
+    margin: 0px 0px 10px 0px;
 }
