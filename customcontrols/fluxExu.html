@@ -3,59 +3,77 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2"></script>
 
 
-<div class="row">
+<div class="row" id="customControlRef">
       <div class="col-md-12">
-            <div>
-                  <label class="input_long">Utilisateur<input type="text" id="nom_createur" name="nom_createur" value="user" size="4"></label>
-                  <label  class="input_long">Projet<input type="text" id="identifiantSimulation" name="identifiantSimulation" placeholder="simulation" size="6" ></label>
+            <!--Nom User et projet-->
+            <div class="row customOptionsBloc" id="projectName">
+                  <div class="col-sm-6" style="padding-left: 0;">
+                        <label class="input_long"> 
+                              <i class="fas fa-user"></i> Utilisateur
+                              <input type="text" id="nom_createur" name="nom_createur" value="user" >
+                        </label>
+                  </div>
+                  <div class="col-sm-6" style="padding-left: 0;">
+                        <label  class="input_long"> 
+                              <i class="fas fa-sticky-note"></i> Projet
+                              <input type="text" id="identifiantSimulation" name="identifiantSimulation" placeholder="simulation" >
+                        </label>
+                  </div>                  
             </div>
 
-            <b>Définition de la zone d'étude</b>
-            <div class="custom-control custom-switch">
-                  <input type="checkbox" class="custom-control-input" id="customSwitches_exu" onclick="mviewer.customControls.fluxExu.getOutlets();">
-                  <label class="custom-control-label" for="customSwitches_exu" >Afficher les exutoires sur la carte</label>
+            <!--Définition de la zone d'étude-->
+            <div class="row customOptionsBloc" id="projectZone">
+                  <div class="titleOption">Définition de la zone d'étude</div>
+                  <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="customSwitches_exu" onclick="mviewer.customControls.fluxExu.getOutlets();">
+                        <label class="custom-control-label" for="customSwitches_exu" ><i>Afficher les exutoires sur la carte</i></label>
+                  </div>
+                  <label>Seléctionner une entité: </label><br>
+                  <input type="checkbox" id="bv" name="bv" checked onclick="mviewer.customControls.fluxExu.check_bv_baie('bv');">
+                  <label for="bv" >Bassin versant</label>
+                  <input type="checkbox" id="baie" name="baie" onclick="mviewer.customControls.fluxExu.check_bv_baie('baie');">
+                  <label for="baie">Baie</label><br>
+                  <label>Surface des sbv (ha)
+                  <input type="text" id="seuil_bv" name="seuil_bv" value="500" size="1">
+                  </label>
+                  <button id="get_bv" class='btnTNT btn_vert2' onclick="mviewer.customControls.fluxExu.getExu();" >
+                        <i class="far fa-dot-circle"></i> Cibler
+                  </button>
+                  <div>
+                        <label >Résolutions des rasters en sortie: <br><input type="text" id="resolution" name="resolution" value="20" size="1"></label>
+                  </div>
+                  <button id="get_mnt" class='btnTNT btn_vert' onclick="mviewer.customControls.fluxExu.getDEM();">
+                        <i class="fas fa-arrow-right"></i> Valider
+                  </button>
+                  <button id="return" class='btnTNT btn_reint' onclick="mviewer.customControls.fluxExu.restart();">
+                        Réinitialiser
+                  </button>
             </div>
-            Sélectionner une entité:<br>
-            <input type="checkbox" id="bv" name="bv" checked onclick="mviewer.customControls.fluxExu.check_bv_baie('bv');">
-            <label for="bv" >Bassin versant</label>
-            <input type="checkbox" id="baie" name="baie" onclick="mviewer.customControls.fluxExu.check_bv_baie('baie');">
-            <label for="baie">Baie</label><br>
-            <label>Surface des sbv (ha)
-            <input type="text" id="seuil_bv" name="seuil_bv" value="500" size="1">
-            </label>
-            <button id="get_bv" class='btn_cible' onclick="mviewer.customControls.fluxExu.getExu();" >
-                  Cibler
-            </button>
-      <div>
-            <label >Résolutions des rasters en sortie: <br><input type="text" id="resolution" name="resolution" value="20" size="1"></label>
-      </div>
-      <button id="get_mnt" class='btn_vert' onclick="mviewer.customControls.fluxExu.getDEM();">
-            Valider
-      </button>
-      <button id="return" class='btn_reint' onclick="mviewer.customControls.fluxExu.restart();">
-            Réinitialiser
-      </button>
 
-      <div> <!--parametrage -->
-      <br><b>Paramétrage des variables</b><br>
-      Sélectionner chacune des thématiques ci-dessous pour accéder aux paramètres des variables:
-      <br>
-      <button id='btn_sol' class='btn_param' onclick="mviewer.customControls.fluxExu.fitSol();">
-            Caractéristique des sols
-      </button>
-      <button id='btn_dfa' class='btn_param' onclick="mviewer.customControls.fluxExu.affCheptel();">
-            DFA
-      </button>
-      <button id="btn_rpg" class='btn_param' onclick="mviewer.customControls.fluxExu.plot_rpg();">
-            RPG &amp; Rotation
-      </button>
-      <button id='btn_station' class='btn_param' onclick="mviewer.customControls.fluxExu.qualityStation();">
-            Station qualité
-      </button>
+            
+            <!--Paramétrage des variables-->
+            <div class="row customOptionsBloc" id="projectVariables">
+                  <div class="titleOption">Paramétrage des variables</div>
+                  <p>Sélectionner chacune des thématiques ci-dessous pour accéder aux paramètres des variables:</p>
+                  <button id='btn_sol' class='btnTNT btn_param' onclick="mviewer.customControls.fluxExu.fitSol();">
+                        Caractéristique des sols
+                  </button>
+                  <button id='btn_dfa' class='btnTNT btn_param' onclick="mviewer.customControls.fluxExu.affCheptel();">
+                        DFA
+                  </button>
+                  <button id="btn_rpg" class='btnTNT btn_param' onclick="mviewer.customControls.fluxExu.plot_rpg();">
+                        RPG &amp; Rotation
+                  </button>
+                  <button id='btn_station' class='btnTNT btn_param' onclick="mviewer.customControls.fluxExu.qualityStation();">
+                        Station qualité
+                  </button>
+            </div>
 
-      </div><br>
-      <button id="get_ref" class='btn_vert' onclick="mviewer.customControls.fluxExu.getURL();">
-            Créer le référentiel
-      </button>
+            <!--Création du référentiel-->
+            <div class="row customOptionsBloc" id="projectValidate" style="text-align: center;">                  
+                  <button id="get_ref" class='btnTNT btn_vert' onclick="mviewer.customControls.fluxExu.getURL();">
+                        <i class="fas fa-arrow-right"></i> Créer le référentiel
+                  </button>
+            </div>
       </div>
 </div>

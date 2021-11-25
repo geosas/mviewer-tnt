@@ -175,7 +175,7 @@ mviewer.customControls.fluxExu = (function () {
             if (mviewer.lang.lang == "en") {
                 processingBarUpdate(5, "Waiting queue : please wait");
             } else {
-                processingBarUpdate(5, "File d'attente : veuillez patienter");
+                processingBarUpdate(5, "File d'attente : merci de patienter");
             }
 
         } else if (response.Status.ProcessStarted) {
@@ -205,7 +205,7 @@ mviewer.customControls.fluxExu = (function () {
                     alert("Change station no data for NO3 here ");
                 } else {
                     processingBarUpdate(100, "Pas de donnée ici pour NO3");
-                    alert("Changer de station pas de données de NO3 à cette localisation");
+                    alert("Veuillez changer de station, aucun données de NO3 n'est disponible à cette localisation");
                 }
                 clearInterval(_updating);
                 clearInterval(_countdown);
@@ -238,7 +238,7 @@ mviewer.customControls.fluxExu = (function () {
             Swal.fire({
               icon: 'error',
               title: 'Erreur',
-              text: "Une erreur c'est produite, si elle persiste veuillez nous contacter et nous communiquer les informations ci-dessous",
+              text: "Une erreur s'est produite, si elle persiste veuillez nous contacter et nous communiquer les informations ci-dessous",
               footer:_uuid+'Station : '+_stationsSelectedByUser+'  Date : '+new Date().toLocaleString(),
 
             })
@@ -331,8 +331,8 @@ mviewer.customControls.fluxExu = (function () {
                                         Swal.fire({
                                             icon: 'error',
                                             title: 'Erreur',
-                                            text: "Le seuil des sous-bassins versant est trop faible, augmenter sa valuer\n ou \n\
-La coordonnée indiquée possède une altitude inférieure à 0, aucune simulation possible. Veuillez indiquer un point plus en amont",
+                                            text: "Le seuil des sous-bassins versant est trop faible, veuillez augmenter sa valuer\n ou \n\
+La coordonnée indiquée possède une altitude inférieure à 0, aucune simulation n'est possible. Veuillez indiquer un point plus en amont",
                                         });
                                     } else {
                                         mviewer.showLocation('EPSG:2154', Number(_xy[0]), Number(_xy[1]));
@@ -347,7 +347,7 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
 
                                 } else if (outputTag.Identifier === "url") {
                                     if (outputTag.Data.LiteralData=='projectNotNone'){
-                                        alert("Projet déjà existant, changer le nom. Si c'est votre projet, le nom d'utilisateur ne correspond pas")
+                                        alert("Projet déjà existant, merci de changer le nom du projet. C'est votre projet ? le nom d'utilisateur ne correspond pas.")
                                     } else if (outputTag.Data.LiteralData == 'mntfailed') {
                                         alert("L'extraction du MNT a échoué")
                                     }
@@ -355,7 +355,7 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
                                     $("#bottom-panel").toggleClass("active");
                                     Swal.fire({
                                         icon: 'success',
-                                        text: "Extraction des données réussie, paramètrage à effectuer",
+                                        text: "Extraction des données réussie au sein de la zone d'étude sélectionnée, veuillez maintenant paramètrer les variables du modèle",
                                     }); // afficher une couche station ?
                                 } else if (outputTag.Identifier === "carte_sol") {
                                     if (outputTag.Data.ComplexData.length === undefined) {}
@@ -376,9 +376,10 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
                                     //$("#bottom-panel").toggleClass("active");
                                         Swal.fire({
                                             icon: 'success',
-                                            text: "Les DFA ont été ajoutées au référentiel",
+                                            text: "Les données concernant la déclaration des flux d'azote ont été ajoutées au référentiel",
                                         });
-                                        $("#btn_dfa").css("background-color","green");
+                                        $("#btn_dfa").css("background-color","var(--mycolor)");
+                                        $("#btn_dfa").css("color","white");
                                         if ($("#legendwms").children().first()) {
                                             $("#legendwms").remove();
                                             deleteLayers(["mntWms"]);
@@ -393,7 +394,7 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
                                             $("#graphFlowSimulatedExtend").children().first().remove();
                                         }
                                     }
-                                    $("#divPopup1").append("<div>Veuillez sélectionner sur la carte les sbv pour afficher les DFA générés</div>")
+                                    $("#divPopup1").append("<div>Veuillez sélectionner sur la carte les sbv pour afficher les DFA générées</div>")
                                     _processing = false;
                                 } else if (outputTag.Identifier === "sbv_rotation") {
                                     if (outputTag.Data.ComplexData.length === undefined) {}
@@ -404,7 +405,7 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
                                 } else if (outputTag.Identifier === "station_qualite") {
                                     if ((outputTag.Data.ComplexData[0]==='f')){
                                         alert("Il n'y a pas de station dans la zone.\nVeuillez changer de bassin versant.\n \
-                                        Il est possible de continuer sans station (pas pour l'instant")
+                                        Il est possible de continuer sans station (pas pour l'instant)")
                                     } else {
                                         plotGeojsonQualite(JSON.parse(outputTag.Data.ComplexData));
                                     }
@@ -435,7 +436,8 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
                                             text: "Les caractéristiques du sol ont été ajoutées au référentiel",
                                         });
                                         solLayer.setVisible(false)
-                                        $("#btn_sol").css("background-color","green");
+                                        $("#btn_sol").css("background-color","var(--mycolor)");
+                                        $("#btn_sol").css("color","white");
                                     }
                                     if (outputTag.Data.LiteralData=='ok_rpg'){
                                         $('#rpgInput').collapse('hide')
@@ -454,11 +456,21 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
                                     }
                                 } else if (outputTag.Identifier === "Download_URL"){
                                     alert(outputTag.Data.LiteralData)
+                                    $("#graphFlowSimulated").css("background-color","#ffffff");
                                     $("#divPopup1").append([
-                                        "<b style='padding-top:60px;font-size:20px' >Lien de téléchargement : </b>",
-                                        "<br><a href="+outputTag.Data.LiteralData+">"+outputTag.Data.LiteralData+ "</a>",
-                                        "<br><b style='padding-top:60px;font-size:20px' >Lien WMS : </b>",
-                                        "<br>http://psncalc.agrocampus-ouest.fr/tntserver/"+simulationName+"/wms"].join(""));
+                                        '<div id="blockDownlRef">',
+                                            '<div class="titre_bottom">Votre référentiel TNT a été créé avec succès !</div>',
+                                            '<div class="downlOptions getZip">',
+                                                '<div class="titleOptions">Lien de téléchargement</div>',
+                                                "<p>Télécharger l'ensemble des données (formatGeopackage) composant le référentiel au sein d'un dossier compressé</p>",
+                                                '<a class="downlLink" href='+outputTag.Data.LiteralData+'>'+outputTag.Data.LiteralData+'</a>',
+                                            '</div>',
+                                            '<div class="downlOptions getWMS">',
+                                                '<div class="titleOptions">Visualisation WMS</div>',
+                                                "<p>Visualiser l'ensemble des données (flux WMS) composant le référentiel au sein d'un outil cartographique</p>",
+                                                '<p class="downlLink">http://psncalc.agrocampus-ouest.fr/tntserver/'+simulationName+'/wms</p>',
+                                            '</div>',
+                                        '</div>',].join(""));
                                     _processing = false;
                                 }
                             }
@@ -559,7 +571,6 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
 
       //plot le débit, la concentration et le flux à l'emplacement d'une station
 
-
         let trace1={
             name:"No3- mg/l",
             x:[],
@@ -577,7 +588,7 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
         });
         _layout = {
             xaxis: {
-                title: 'Date',
+                //title: 'Date',
                 domain: [0, 0.85]
             },
             yaxis: {
@@ -589,12 +600,15 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
                 rangemode: 'tozero'
             },
             showlegend: false,
-            title: `<br>Station: ${station_name}, ${datas.data.length}\n de: ${datas.data[0].date_prelevement} à ${datas.data[datas.data.length - 1].date_prelevement}`,
+            title: `Station: ${station_name}, ${datas.data.length}\n enregistrements de: ${datas.data[0].date_prelevement} à ${datas.data[datas.data.length - 1].date_prelevement}`,
+            font: {
+                family: "'Poppins', sans-serif"
+            },
             margin: {
                 l: 40,
                 r: 20,
                 b: 40,
-                t: 20
+                t: 50
             }
 
         };
@@ -627,19 +641,19 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
             source: vectorSource,
             name: "qualiteLayer",
             style: function (feature) {
-                if (feature.get('nb_rec_year') >= 12){col="#17d523"}
-                else if (feature.get('nb_rec_year') < 12 && (feature.get('nb_rec_year') >= 6 )) {col="orange"}
-                else if (feature.get('nb_rec_year') < 6) {col="red"}
+                if (feature.get('nb_rec_year') >= 12){col="#aacf6b"}
+                else if (feature.get('nb_rec_year') < 12 && (feature.get('nb_rec_year') >= 6 )) {col="#eeb245"}
+                else if (feature.get('nb_rec_year') < 6) {col="#e34b4b"}
                 if (_map.getView().getZoom()<=11.5){
                     return new ol.style.Style({
                         image: new ol.style.RegularShape({
                             fill: new ol.style.Fill({color: col}),
                             stroke: new ol.style.Stroke({
-                                color: 'black',
+                                color: 'white',
                                 width: 1
                             }),
                             points: 3,
-                            radius: 6,
+                            radius: 10,
                             angle: 0,
                         })
                     })
@@ -648,18 +662,18 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
                         image: new ol.style.RegularShape({
                             fill: new ol.style.Fill({color: col}),
                             stroke: new ol.style.Stroke({
-                                color: 'black',
+                                color: 'white',
                                 width: 1
                             }),
                             points: 3,
-                            radius: 6,
+                            radius: 10,
                             angle: 0,
                         }),
                         text:new ol.style.Text({
-                            font: '12px Calibri,sans-serif',
+                            font: '12px Poppins,sans-serif',
                             text: feature.get('date_min')+'\n'+feature.get('date_max')
                             +'\n'+feature.get('nb_rec'),
-                            offsetY: 30,
+                            offsetY: 40,
                             padding: [0.1, 0.1, 0.1, 0.1],
                             fill: new ol.style.Fill({ color: '#000' }),
                             stroke: new ol.style.Stroke({
@@ -697,14 +711,14 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
                     return new ol.style.Style({
                         stroke: new ol.style.Stroke({
                             width: 2,
-                            color: "#1cb920"
+                            color: "black"
                         }),
                         fill: new ol.style.Fill({
                             //color: "rgba(191, 181, 192, 0.1)",
                             color: feature.get('color')
                         }),
                         text:new ol.style.Text({
-                            font: '12px Calibri,sans-serif',
+                            font: '12px Poppins,sans-serif',
                             text: feature.get('N_UCS').toString(),
                             fill: new ol.style.Fill({
                                 color: "black"
@@ -735,13 +749,13 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
                     return new ol.style.Style({
                         stroke: new ol.style.Stroke({
                             width: 2,
-                            color: "#1cb920"
+                            color: "grey"
                         }),
                         fill: new ol.style.Fill({
                             color: "rgba(191, 181, 192, 0.1)",
                         }),
                         text:new ol.style.Text({
-                            font: '12px Calibri,sans-serif',
+                            font: '12px Poppins,sans-serif',
                             text: feature.get('nom_geo'),
                             fill: new ol.style.Fill({
                                 color: "black"
@@ -781,7 +795,7 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
                             color: feature.get('color'),
                         }),
                         text:new ol.style.Text({
-                            font: '12px Calibri,sans-serif',
+                            font: '12px Poppins,sans-serif',
                             text: feature.get('rota_melange_1')+" --> "+feature.get('rota_melange_1_pct')+"%"+
                                 "\n"+feature.get('rota_melange_2')+" --> "+feature.get('rota_melange_2_pct')+"%"+
                                 "\n"+feature.get('rota_melange_3')+" --> "+feature.get('rota_melange_3_pct')+"%"
@@ -819,9 +833,9 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
                 name: "exutoireLayer",
                 style:  new ol.style.Style({
                     image: new ol.style.Circle({
-                        fill: new ol.style.Fill({color: 'rgba( 211, 158, 16, 0.1)'}),
-                        stroke: new ol.style.Stroke({color: 'black', width: 1.5}),
-                        radius: 3,
+                        fill: new ol.style.Fill({color: '#2c4153'}),
+                        stroke: new ol.style.Stroke({color: 'white', width: 1.5}),
+                        radius: 5,
 
                     })
                 })
@@ -842,13 +856,13 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
                     return new ol.style.Style({
                         stroke: new ol.style.Stroke({
                             width: 2,
-                            color: "#1cb920"
+                            color: "black"
                         }),
                         fill: new ol.style.Fill({
                             color: "rgba(191, 181, 192, 0.1)",
                         }),
                         text:new ol.style.Text({
-                            font: '12px Calibri,sans-serif',
+                            font: '12px Poppins,sans-serif',
                             text: feature.get('nom_geo'),
                             fill: new ol.style.Fill({
                                 color: "black"
@@ -915,14 +929,14 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
                     return new ol.style.Style({
                         stroke: new ol.style.Stroke({
                             width: 2,
-                            color: "#a10010"
+                            color: "black"
                         }),
                         fill: new ol.style.Fill({
                             color: "rgba(191, 181, 192, 0.05)",
                         }),
                         text:new ol.style.Text({
-                            font: '12px Calibri,sans-serif',
-                            text: "Cutlure été/hiver "+feature.get('culture été hiver')+" %"+
+                            font: '12px Poppins,sans-serif',
+                            text: "Culture été/hiver "+feature.get('culture été hiver')+" %"+
                             "\n"+"Forêt "+feature.get('forêt')+" %"+
                             "\n"+"Prairie "+feature.get('prairie')+" %"+
                             "\n"+"Urbain "+feature.get('urbain')+" %"+
@@ -1079,6 +1093,9 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
 
                         var layout = {
                             title:"Canton : "+titre,
+                            font: {
+                                family: "'Poppins', sans-serif"
+                            },
                             grid: {rows: 1, columns: 3, pattern: 'independent'},
                         };
                         Plotly.newPlot($("#graphFlowSimulated")[0], hist, layout)
@@ -1143,6 +1160,9 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
                         });
                         var layout = {
                             title: 'Répartition des cultures, sbv : '+feature.get('sbv')+ ' (info en ha)',
+                            font: {
+                                family: "'Poppins', sans-serif"
+                            },
                             annotations: annotations,
                             height: 400,
                             width: 1200,
@@ -1547,7 +1567,7 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
         fitSol: function(){
             if (_processing === false) {
                 if (dem==true){
-                    $("#btn_sol").css("border-color","green");
+                    $("#btn_sol").css("border-color","var(--mycolor)");
                     deleteLayers(["mntWms"]);
                     if ($("#legendwms").children().first()) {
                         $("#legendwms").remove();
@@ -1598,13 +1618,14 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
                     tableau+=('<td style="text-align:center"><input type="text" id="sol_'+i+'" required minlength="1" maxlength="2" value="'+geoj[i].properties.categorie+'"></td></tr>');
                     }
                     tableau+=("</tbody></table>");
-                    tableau+='<a style="color:blue;text-decoration: underline;" href="http://geowww.agrocampus-ouest.fr/metadata/Description_metadonnees.html" \
+                    tableau+='<a href="http://geowww.agrocampus-ouest.fr/metadata/Description_metadonnees.html" \
                     target="_blank"> Propriétés pédologiques - Description des champs</a>'
                     $("#graphFlowSimulated").append(tableau)
+                    $("#graphFlowSimulated").css("background-color","#ffffff");
                     $("#divPopup1").append([
                         "<div class='titre_bottom' >Caractéristiques des sols</div>",
-                        "<div>Dans le tableau, classifiez les UCS selon leurs types de matériaux dominants.",
-                        '<br><button class="btn_vert" onclick="mviewer.customControls.fluxExu.classement_sol()">Ajouter</button></div>'].join(''));
+                        "<div><i class='fas fa-arrow-right'></i> Dans le tableau, classifiez les UCS selon leurs types de matériaux dominants.",
+                        '<br><br><br><button class="btnTNT btn_vert" onclick="mviewer.customControls.fluxExu.classement_sol()"><i class="fas fa-plus-circle"></i> Ajouter</button></div>'].join(''));
                 } else { alert("MNT non généré")}
             } else { alert("process en cours, attendez")}
         },
@@ -1677,7 +1698,7 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
             if ($("#legendwms").children().first()) {
                 $("#legendwms").remove();
             }
-            $("#btn_dfa").css("border-color","green");
+            $("#btn_dfa").css("border-color","var(--mycolor)");
             cheptelLayer.setVisible(true)
             _map.removeInteraction(selection_station)
             solLayer.setVisible(false)
@@ -1695,19 +1716,20 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
 
             $("#divPopup1").append([
                 "<div class='titre_bottom' >Déclaration des flux d'azote (DFA) </div>",
-                "<div>Veuillez sélectionner sur la carte les cantons dont les données",
-                "DFA seront ajoutées au référentiel, SHIFT+CLIC : sélectionner plusieurs cantons</div>",
+                "<div><i class='fas fa-arrow-right'></i> Veuillez sélectionner sur la carte les cantons dont les données",
+                " DFA seront ajoutées au référentiel</br><i>SHIFT+CLIC : sélectionner plusieurs cantons</i></div>",
                 '<div class="custom-control custom-switch">',
                 '<input type="checkbox" checked class="custom-control-input" id="customSwitches_dfa" onclick="mviewer.customControls.fluxExu.hide_couche(\'cheptel\');">',
                 '<label class="custom-control-label" for="customSwitches_dfa" >Contour des cantons</label></div>',
                 '<div class="custom-control custom-switch">',
                 '<input type="checkbox" class="custom-control-input" id="customSwitches" onclick="mviewer.customControls.fluxExu.ocs_wms();">',
-                '<label class="custom-control-label" for="customSwitches" >Afficher l\'occupation du sol </label></div>',
-                '<button class="btn_param" onclick="mviewer.customControls.fluxExu.fitDfa1(\'m1\');">',
-                'Utiliser tous les cantons</button>',
-                '<button class="btn_vert" onclick="mviewer.customControls.fluxExu.fitDfa2();">',
-                'Ajouter la sélection</button>'].join(''));
-            $("#graphFlowSimulated").append("<i>Sélectionnez un canton sur la carte pour afficher les informations sur les flux d'azote associées</i>")
+                '<label class="custom-control-label" for="customSwitches" >Afficher l\'occupation du sol </label></div><br>',
+                '<button class="btnTNT btn_vert2" onclick="mviewer.customControls.fluxExu.fitDfa1(\'m1\');">',
+                '<i class="fas fa-plus-circle"></i> Utiliser tous les cantons</button>',
+                '<button class="btnTNT btn_vert" onclick="mviewer.customControls.fluxExu.fitDfa2();">',
+                '<i class="fas fa-plus-circle"></i> Ajouter la sélection</button>'].join(''));
+            $("#graphFlowSimulated").append("<div class='blockNoData'><img class='imgNoData' src='apps/mviewer-tnt/img/data_nocanton.svg'><p><i>Sélectionnez un canton sur la carte pour afficher les informations sur les flux d'azote associées</i></p></div>");
+            $("#graphFlowSimulated").css("background-color","#80808012");
         },
         fitDfa1: function (methode) {
             if (_processing === false) {
@@ -1749,7 +1771,7 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
                         $("#bottom-panel").toggleClass("active");
                     }
                 } else {
-                   alert("Les DFA par canton n'ont pas été générés");
+                   alert("Les DFA par canton n'ont pas été générées");
                 }
             } else {
                 // translate
@@ -1779,7 +1801,7 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
                 if (cantonSelected.length != 0){
                     mviewer.customControls.fluxExu.fitDfa1(cantonSelected)
                 } else {
-                    alert("veulliez sélectionner au moins un canton")
+                    alert("Veuillez sélectionner au moins un canton")
                 }
 
         },
@@ -1804,7 +1826,7 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
         },
         plot_rpg : function(){
 
-            $("#btn_rpg").css("border-color","green");
+            $("#btn_rpg").css("border-color","var(--mycolor)");
             if (rpg_info != undefined){
                 if ($("#bottom-panel").hasClass("")) {
                     $("#bottom-panel").toggleClass("active");
@@ -1831,15 +1853,17 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
                     }
                 }
                 $("#divPopup1").append([
-                    "<div><label for='year-select'>Année du RPG:</label>",
+                    "<div class='blockRPG'><div class='titre_bottom' > Registre parcellaire graphique (RPG) </div>",
+                    "<div class='textRPG'><i class='fas fa-arrow-right'></i> Veuillez sélectionner le millésime RPG de référence dont les données seront ajoutées au référentiel</div>",
+                    "<div class='inputRPG'><label for='year-select'>Millésime du RPG de référence :</label><br>",
                     "<select name='year_rpg_wms' id='year_rpg_wms' onchange='mviewer.customControls.fluxExu.rpg_wms(this.value)'>",
                     "<option value='2019'>2019</option>",
                     "<option value='2018'>2018</option>",
                     "<option value='2017'>2017</option>",
                     "<option value='2016'>2016</option>",
                     "<option value='2015'>2015</option></select></div>",
-                    "<button class='btn_vert' onclick='mviewer.customControls.fluxExu.valider_rpg()'>Valider</button>",
-                    "<div>Veuillez sélectionner un sbv, pour afficher ses statistiques</div>",].join(""));
+                    "<button class='btnTNT btn_vert' onclick='mviewer.customControls.fluxExu.valider_rpg()'><i class='fas fa-plus-circle'></i> Ajouter</button>",
+                    "</div>"].join(""));   
                 data=[]
                 annotations=[]
                 decal=-0.2
@@ -1881,12 +1905,12 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
                             text: nameY,
                             x: decal,
                             y: 1.2},
-                            {font: {size: 15},
+                            {font: {size: 12},
                             showarrow: false,
                             text: surf,
                             x: decal,
                             y: 1.12},
-                            {font: {size: 15},
+                            {font: {size: 12},
                             showarrow: false,
                             text: parcelles,
                             x: decal,
@@ -1896,10 +1920,13 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
                     }
                 });
                 var layout = {
-                    title: 'Répartition des cultures, (info en ha)',
+                    title: 'Évolution de la répartition des cultures selon les catégories (en ha)',
                     annotations: annotations,
-                    height: 400,
-                    width: 1200,
+                    font: {
+                        family: "'Poppins', sans-serif"
+                    },
+                    height: 350,
+                    width: 1000,
                     showlegend: true,
                     grid: {rows: 1, columns: col_max+1}
                 };
@@ -1917,7 +1944,8 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
             sbv_rotationLayer.setVisible(false)
             $("#bottom-panel").toggleClass("active");
 
-            $("#btn_rpg").css("background-color","green");
+            $("#btn_rpg").css("background-color","var(--mycolor)");
+            $("#btn_rpg").css("color","white");
         },
         rpg_wms: function(year_wms){
             if ($("#legendwms").children().first()) {
@@ -1928,7 +1956,7 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
         },
         qualityStation: function(){
 
-            $("#btn_station").css("border-color","green");
+            $("#btn_station").css("border-color","var(--mycolor)");
             if ($("#graphFlowSimulated").children().first()) {
                 $("#divPopup1").empty();
             }
@@ -1943,16 +1971,16 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
             }
 
             $("#divPopup1").append([
-                "<div class='titre_bottom' >Station qualité (NO3-) </div>",
-                "<div>Veuillez sélectionner sur la carte les stations qualités ",
-                "dont les enregistrements seront ajoutées au référentiel, SHIFT+CLIC : sélectionner plusieurs stations</div>",
-                "Estimation du nombre d'enregistrement à l'année : <6 6 à 11 > 12",
-                '<label class="input_long">Nombre d\'enregistrement minimum :<input type="text" id="seuil_rec" name="seuil_rec" value="10" size="4"></label>',
-                '<button style="color:white ;background-color: #2e5367;" onclick="mviewer.customControls.fluxExu.addQualityStation();">',
-                'Rechercher les stations</button>',
-                '<br><button class="btn_vert" onclick="mviewer.customControls.fluxExu.ajout_station();">',
-                'Ajouter la sélection</button>'].join(''));
-            $("#graphFlowSimulated").append("<i>Sélectionnez une station sur la carte pour afficher les informations sur les flux d'azote associées</i>")
+                "<div class='blockEau'> <div class='titre_bottom' >Station qualité (NO3-) </div>",
+                    '<label class="input_long"><i class="fas fa-arrow-right"></i> Indiquez un nombre d\'enregistrement minimum :',
+                    '<input type="text" id="seuil_rec" name="seuil_rec" value="10" size="4"></label>',
+                    '<button class="btnTNT btn_vert2" onclick="mviewer.customControls.fluxExu.addQualityStation();">Afficher les stations</button>',
+                    "<div class='legendEau'>Estimation du nombre d'enregistrement à l'année : <br><img class='imgLegendStation' src='apps/mviewer-tnt/img/legend_station.svg'></div>",
+                    "<div class='textEau'> <i class='fas fa-arrow-right'></i> Veuillez sélectionner sur la carte les stations qualités dont les enregistrements seront ajoutés au référentiel.<br> SHIFT+CLIC : sélectionner plusieurs stations</div>",                    
+                    '<br><button class="btnTNT btn_vert" onclick="mviewer.customControls.fluxExu.ajout_station();">',
+                    '<i class="fas fa-plus-circle"></i> Ajouter la sélection</button></div>'].join(''));
+                $("#graphFlowSimulated").append("<div class='blockNoData'><img class='imgNoData' src='apps/mviewer-tnt/img/data_nostation.svg'><p><i>Sélectionnez une station sur la carte pour afficher les informations associées</i></p></div>");
+                $("#graphFlowSimulated").css("background-color","#80808012");            
         },
         addQualityStation: function(){
             if (_processing === false) {
@@ -1999,7 +2027,7 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
                         Swal.fire({
                             icon: 'warning',
                             title: 'Warning',
-                            text: "Veuillez attendre la fin du process avant d'en exécuter un nouveau, si vous êtes bloqué actualiser la page",
+                            text: "Veuillez attendre la fin du processus avant d'en exécuter un nouveau. Vous êtes bloqués ? Merci d'actualiser la page.",
                         });
                     }
             }
@@ -2022,9 +2050,10 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
             }
             Swal.fire({
                 icon: 'success',
-                text: "Les stations qualités ont été ajoutées au référentiel",
+                text: "Les données NO3- des stations qualités ont été ajoutées au référentiel",
             });
-            $("#btn_station").css("background-color","green");
+            $("#btn_station").css("background-color","var(--mycolor)");
+            $("#btn_station").css("color","white");
             referentiel=true
         },
         getURL: function () {
@@ -2065,7 +2094,7 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
                         $("#bottom-panel").toggleClass("active");
                     }
                 } else {
-                   alert("Tous les paramètres n'ont pas été définis");
+                   alert("Paramètre(s) manquants. Merci de finaliser le paramètrage des variables du modèle.");
                 }
             } else {
                 // translate
@@ -2079,7 +2108,7 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
                     Swal.fire({
                         icon: 'warning',
                         title: 'Warning',
-                        text: "Veuillez attendre la fin du process avant d'en exécuter un nouveau, si vous êtes bloqué actualiser la page",
+                        text: "Veuillez attendre la fin du processus avant d'en exécuter un nouveau. Vous êtes bloqués ? Merci d'actualiser la page.",
                     });
                 }
             }

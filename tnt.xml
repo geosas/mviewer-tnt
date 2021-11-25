@@ -1,33 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE simfen [
-  <!ENTITY path "/apps/tnt-dev">
+  <!ENTITY path "apps/mviewer-tnt">
 ]>
 <config>
     <application
         lang='fr'
-	    title="Portail cartographique du projet TNT"
-        logo=""
+	    title="MétaTNT"
+        logo="&path;/img/TNT_logoNavbar.svg"
         help="&path;/tnt_help.html"
-        style="&path;/css/simfen.css"
+        style="&path;/css/tnt-theme.css"
         exportpng="false"
-        showhelp="true"
+        showhelp="false"
         coordinates="false"
         measuretools="false"
         togglealllayersfromtheme="false">
     <!--translate="Français,English" translatefile="&path;/translate/translate.json"-->
     </application>
+
     <mapoptions maxzoom="18" projection="EPSG:3857" center="-333217,6138202" zoom="9" />
     <olscompletion type="ban" url="https://api-adresse.data.gouv.fr/search/" attribution="" />
-    <searchparameters bbox="false" localities="true" features="false" static="false"/>
+    <searchparameters svgcolor='orange' bbox="false" localities="true" features="false" static="false"/>
     <baselayers style="default">
         <baselayer visible="true" id="positron" thumbgallery="img/basemap/positron.png" title="CartoDb" label="Positron" type="OSM" url="https://{a-c}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png" attribution="Map tiles by  &lt;a href=&quot;https://cartodb.com/attributions&quot;&gt;CartoDb&lt;/a&gt;, under  &lt;a href=&quot;https://creativecommons.org/licenses/by/3.0/&quot;&gt;CC BY 3.0 &lt;/a&gt;"  ></baselayer>
-	<baselayer visible="false" id="esriworldimagery" thumbgallery="img/basemap/esriworldwide.jpg" title="Esri world imagery" label="Esri world imagery" type="OSM" url="http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}" attribution="Esri world imagery"  ></baselayer>
+	    <baselayer visible="false" id="esriworldimagery" thumbgallery="img/basemap/esriworldwide.jpg" title="Esri world imagery" label="Esri world imagery" type="OSM" url="http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}" attribution="Esri world imagery"  ></baselayer>
         <baselayer type="WMS" id="osm" label="OpenStreetMap" title="Plan OSM Géobretagne" thumbgallery="img/basemap/osm.png" url="http://osm.geobretagne.fr/gwc01/service/wms" layers="osm:google" format="image/png" visible="false" ></baselayer>
         <baselayer type="WMS" id="scan25" label="Scan 25 - IGN" title="Scan 25 - IGN" thumbgallery="" url="https://tile.geobretagne.fr:443/gwc02/service/wms" layers="carte" format="image/png" visible="false" ></baselayer>
-
     </baselayers>
+
     <themes mini="false">
-        <theme name="TNT" collapsed="false" id="simfen" icon="fas fa-tint">
+        <theme name="TNT" collapsed="false" id="simfen" icon="fas fa-arrow-right">
 
             <!-- couche d'initialisation qui se supprime juste après-->
             <layer id="initSimfen" name="Resfresh page, not fully loaded, press F5" visible="true" queryable="false"
@@ -37,8 +38,8 @@
                 expanded="false">
             </layer>
             <!-- couche d'initialisation qui se supprime juste après-->
-            <group name="Fonctions" id="Fonctions">
-                <layer id="fluxExu" name="Référenciel" visible="true" queryable="false"
+            <group name="Modules / Services" id="Fonctions">
+                <layer id="fluxExu" name="Référentiel" visible="true" queryable="false"
                     type="customlayer" opacity="1" legendurl="img/blank.gif"
                     url="&path;/customlayers/fluxExu.js"
                     customcontrol="true" customcontrolpath="&path;/customcontrols/"
@@ -50,7 +51,6 @@
                     customcontrol="true" customcontrolpath="&path;/customcontrols/"
                     expanded="true">
                 </layer>
-
                 <layer id="scenario2"   name="Scénario" visible="false" queryable="false"
                     type="customlayer" opacity="1" legendurl="img/blank.gif"
                     url="&path;/customlayers/scenario2.js"
@@ -58,7 +58,7 @@
                     expanded="true">
 		        </layer>
 			</group>
-            <group name="Couche : Réseaux" id="Réseaux">
+            <group name="Couches géographiques Réseaux" id="Réseaux">
                 <layer id="bzh_rh25ha" name="Réseau hydrographique modélisé seuillé à 25 ha (MNT 50m)" visible="true"
                 tiled="true" queryable="false" infoformat="application/vnd.ogc.gml"
                 opacity="0.5" url="https://geosas.fr/geoserver/mntsurf/ows">
@@ -74,7 +74,7 @@
                             
             </group>
 
-            <group name="Couches : Surfaces" id="Surfaces">
+            <group name="Couches géographiques Surfaces" id="Surfaces">
 		<layer id="exploitations_agricoles" name="Orientation technico-économique majoritaire"  visible="false" tiled="false"
                 searchable="false" queryable="true" opacity="0.8"
                 infoformat="application/vnd.ogc.gml" featurecount="1"
@@ -87,11 +87,11 @@
                 metadata-csw="http://geowww.agrocampus-ouest.fr/geonetwork/srv/eng/csw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;elementSetName=full&amp;ID=121049c6-f803-462e-8df1-24c4b4add9d3">
                 </layer>
                 <layer id="bzh_zhp" name="Zones Humides Potentielles" visible="false" tiled="true"
-                    queryable="false" fields="" aliases=""
-                    infoformat="application/vnd.ogc.gml"
-                    style=""
-                    opacity="0.8"
-                    url="http://geowww.agrocampus-ouest.fr/geoserver/mntsurf/ows">
+                queryable="false" fields="" aliases=""
+                infoformat="application/vnd.ogc.gml"
+                style=""
+                opacity="0.8"
+                url="http://geowww.agrocampus-ouest.fr/geoserver/mntsurf/ows">
                 </layer>
                 <layer id="PlanEau_FXX" name="Plans d'eau BD Topage (2019)" visible="false" tiled="true"
                     queryable="true"
