@@ -175,7 +175,7 @@ mviewer.customControls.fluxExu = (function () {
             if (mviewer.lang.lang == "en") {
                 processingBarUpdate(5, "Waiting queue : please wait");
             } else {
-                processingBarUpdate(5, "File d'attente : veuillez patienter");
+                processingBarUpdate(5, "File d'attente : merci de patienter");
             }
 
         } else if (response.Status.ProcessStarted) {
@@ -205,7 +205,7 @@ mviewer.customControls.fluxExu = (function () {
                     alert("Change station no data for NO3 here ");
                 } else {
                     processingBarUpdate(100, "Pas de donnée ici pour NO3");
-                    alert("Changer de station pas de données de NO3 à cette localisation");
+                    alert("Veuillez changer de station, aucun données de NO3 n'est disponible à cette localisation");
                 }
                 clearInterval(_updating);
                 clearInterval(_countdown);
@@ -238,7 +238,7 @@ mviewer.customControls.fluxExu = (function () {
             Swal.fire({
               icon: 'error',
               title: 'Erreur',
-              text: "Une erreur c'est produite, si elle persiste veuillez nous contacter et nous communiquer les informations ci-dessous",
+              text: "Une erreur s'est produite, si elle persiste veuillez nous contacter et nous communiquer les informations ci-dessous",
               footer:_uuid+'Station : '+_stationsSelectedByUser+'  Date : '+new Date().toLocaleString(),
 
             })
@@ -331,8 +331,8 @@ mviewer.customControls.fluxExu = (function () {
                                         Swal.fire({
                                             icon: 'error',
                                             title: 'Erreur',
-                                            text: "Le seuil des sous-bassins versant est trop faible, augmenter sa valuer\n ou \n\
-La coordonnée indiquée possède une altitude inférieure à 0, aucune simulation possible. Veuillez indiquer un point plus en amont",
+                                            text: "Le seuil des sous-bassins versant est trop faible, veuillez augmenter sa valuer\n ou \n\
+La coordonnée indiquée possède une altitude inférieure à 0, aucune simulation n'est possible. Veuillez indiquer un point plus en amont",
                                         });
                                     } else {
                                         mviewer.showLocation('EPSG:2154', Number(_xy[0]), Number(_xy[1]));
@@ -347,7 +347,7 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
 
                                 } else if (outputTag.Identifier === "url") {
                                     if (outputTag.Data.LiteralData=='projectNotNone'){
-                                        alert("Projet déjà existant, changer le nom. Si c'est votre projet, le nom d'utilisateur ne correspond pas")
+                                        alert("Projet déjà existant, merci de changer le nom du projet. C'est votre projet ? le nom d'utilisateur ne correspond pas.")
                                     } else if (outputTag.Data.LiteralData == 'mntfailed') {
                                         alert("L'extraction du MNT a échoué")
                                     }
@@ -355,7 +355,7 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
                                     $("#bottom-panel").toggleClass("active");
                                     Swal.fire({
                                         icon: 'success',
-                                        text: "Extraction des données réussie, paramètrage à effectuer",
+                                        text: "Extraction des données réussie au sein de la zone d'étude sélectionnée, veuillez maintenant paramètrer les variables du modèle",
                                     }); // afficher une couche station ?
                                 } else if (outputTag.Identifier === "carte_sol") {
                                     if (outputTag.Data.ComplexData.length === undefined) {}
@@ -376,7 +376,7 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
                                     //$("#bottom-panel").toggleClass("active");
                                         Swal.fire({
                                             icon: 'success',
-                                            text: "Les DFA ont été ajoutées au référentiel",
+                                            text: "Les données concernant la déclaration des flux d'azote ont été ajoutées au référentiel",
                                         });
                                         $("#btn_dfa").css("background-color","var(--mycolor)");
                                         $("#btn_dfa").css("color","white");
@@ -394,7 +394,7 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
                                             $("#graphFlowSimulatedExtend").children().first().remove();
                                         }
                                     }
-                                    $("#divPopup1").append("<div>Veuillez sélectionner sur la carte les sbv pour afficher les DFA générés</div>")
+                                    $("#divPopup1").append("<div>Veuillez sélectionner sur la carte les sbv pour afficher les DFA générées</div>")
                                     _processing = false;
                                 } else if (outputTag.Identifier === "sbv_rotation") {
                                     if (outputTag.Data.ComplexData.length === undefined) {}
@@ -405,7 +405,7 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
                                 } else if (outputTag.Identifier === "station_qualite") {
                                     if ((outputTag.Data.ComplexData[0]==='f')){
                                         alert("Il n'y a pas de station dans la zone.\nVeuillez changer de bassin versant.\n \
-                                        Il est possible de continuer sans station (pas pour l'instant")
+                                        Il est possible de continuer sans station (pas pour l'instant)")
                                     } else {
                                         plotGeojsonQualite(JSON.parse(outputTag.Data.ComplexData));
                                     }
@@ -456,6 +456,7 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
                                     }
                                 } else if (outputTag.Identifier === "Download_URL"){
                                     alert(outputTag.Data.LiteralData)
+                                    $("#graphFlowSimulated").css("background-color","#ffffff");
                                     $("#divPopup1").append([
                                         "<b style='padding-top:60px;font-size:20px' >Lien de téléchargement : </b>",
                                         "<br><a href="+outputTag.Data.LiteralData+">"+outputTag.Data.LiteralData+ "</a>",
@@ -2017,7 +2018,7 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
                         Swal.fire({
                             icon: 'warning',
                             title: 'Warning',
-                            text: "Veuillez attendre la fin du process avant d'en exécuter un nouveau, si vous êtes bloqué actualiser la page",
+                            text: "Veuillez attendre la fin du processus avant d'en exécuter un nouveau. Vous êtes bloqués ? Merci d'actualiser la page.",
                         });
                     }
             }
@@ -2040,7 +2041,7 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
             }
             Swal.fire({
                 icon: 'success',
-                text: "Les stations qualités ont été ajoutées au référentiel",
+                text: "Les données NO3- des stations qualités ont été ajoutées au référentiel",
             });
             $("#btn_station").css("background-color","var(--mycolor)");
             $("#btn_station").css("color","white");
@@ -2084,7 +2085,7 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
                         $("#bottom-panel").toggleClass("active");
                     }
                 } else {
-                   alert("Tous les paramètres n'ont pas été définis");
+                   alert("Paramètre(s) manquants. Merci de finaliser le paramètrage des variables du modèle.");
                 }
             } else {
                 // translate
@@ -2098,7 +2099,7 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
                     Swal.fire({
                         icon: 'warning',
                         title: 'Warning',
-                        text: "Veuillez attendre la fin du process avant d'en exécuter un nouveau, si vous êtes bloqué actualiser la page",
+                        text: "Veuillez attendre la fin du processus avant d'en exécuter un nouveau. Vous êtes bloqués ? Merci d'actualiser la page.",
                     });
                 }
             }
