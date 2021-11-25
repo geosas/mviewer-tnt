@@ -1309,8 +1309,7 @@ span.badge.counter-slide {
     font-size: 40px !important;
 }
 
-/* Panel des configurations */ 
-
+/* -- Panel des configurations -- */ 
 
 #bottom-panel .popup-content {
 	padding: 10px;
@@ -1321,11 +1320,10 @@ span.badge.counter-slide {
 	font-size: 20px;
 	font-weight: 500;
 	color: var(--mycolor);
-	margin: 10px 0;
- 
+	margin: 10px 0; 
 } 
 
-/* - Template Caractéristiques des sols - */
+/* - Caractéristiques des sols - */
 
 #table_sol {
 	font-family: var(--myfont);
@@ -1385,7 +1383,6 @@ span.badge.counter-slide {
   }
 
   #graphFlowSimulated {
-	/*background-color: #80808012;*/
 	height: 270px;
 	border-radius: 5px;
   }
@@ -1400,4 +1397,55 @@ span.badge.counter-slide {
 .imgNoData {
     width: 40px;
     margin: 0px 0px 10px 0px;
+}
+
+/* Registre Parcellaire graphique */
+
+.inputRPG {
+    margin: 20px 0px 30px;
+}
+
+.inputRPG label {
+    font-weight: 600;
+}
+
+.inputRPG select {
+    width: 40%;
+    padding: 5px 10px;
+    border-radius: 15px;
+    border: 1px solid;
+}
+
+.titleGraph {
+    font-family: var(--myfont);
+    color: #555;
+    font-size: 14px;
+    text-align: center;
+    position: absolute;
+    top: 15%;
+    left: 40%;
+}
+
+/* Station qualité NO3 */
+
+.blockEau label {
+    font-weight: 400;
+}
+
+.blockEau input {
+    /* width: 40%; */
+    padding: 5px 10px;
+    border-radius: 15px;
+    border: 1px solid;
+    margin: 0px 5px;
+}
+
+.legendEau {
+    margin: 5px 0px;
+}
+
+
+.imgLegendStation {
+	height: 18px;
+	margin: 10px;
 }

@@ -561,7 +561,6 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
 
       //plot le débit, la concentration et le flux à l'emplacement d'une station
 
-
         let trace1={
             name:"No3- mg/l",
             x:[],
@@ -579,7 +578,7 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
         });
         _layout = {
             xaxis: {
-                title: 'Date',
+                //title: 'Date',
                 domain: [0, 0.85]
             },
             yaxis: {
@@ -591,12 +590,15 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
                 rangemode: 'tozero'
             },
             showlegend: false,
-            title: `<br>Station: ${station_name}, ${datas.data.length}\n de: ${datas.data[0].date_prelevement} à ${datas.data[datas.data.length - 1].date_prelevement}`,
+            title: `Station: ${station_name}, ${datas.data.length}\n enregistrements de: ${datas.data[0].date_prelevement} à ${datas.data[datas.data.length - 1].date_prelevement}`,
+            font: {
+                family: "'Poppins', sans-serif"
+            },
             margin: {
                 l: 40,
                 r: 20,
                 b: 40,
-                t: 20
+                t: 50
             }
 
         };
@@ -629,19 +631,19 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
             source: vectorSource,
             name: "qualiteLayer",
             style: function (feature) {
-                if (feature.get('nb_rec_year') >= 12){col="#17d523"}
-                else if (feature.get('nb_rec_year') < 12 && (feature.get('nb_rec_year') >= 6 )) {col="orange"}
-                else if (feature.get('nb_rec_year') < 6) {col="red"}
+                if (feature.get('nb_rec_year') >= 12){col="#aacf6b"}
+                else if (feature.get('nb_rec_year') < 12 && (feature.get('nb_rec_year') >= 6 )) {col="#eeb245"}
+                else if (feature.get('nb_rec_year') < 6) {col="#e34b4b"}
                 if (_map.getView().getZoom()<=11.5){
                     return new ol.style.Style({
                         image: new ol.style.RegularShape({
                             fill: new ol.style.Fill({color: col}),
                             stroke: new ol.style.Stroke({
-                                color: 'black',
+                                color: 'white',
                                 width: 1
                             }),
                             points: 3,
-                            radius: 6,
+                            radius: 10,
                             angle: 0,
                         })
                     })
@@ -650,18 +652,18 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
                         image: new ol.style.RegularShape({
                             fill: new ol.style.Fill({color: col}),
                             stroke: new ol.style.Stroke({
-                                color: 'black',
+                                color: 'white',
                                 width: 1
                             }),
                             points: 3,
-                            radius: 6,
+                            radius: 10,
                             angle: 0,
                         }),
                         text:new ol.style.Text({
-                            font: '12px Calibri,sans-serif',
+                            font: '12px Poppins,sans-serif',
                             text: feature.get('date_min')+'\n'+feature.get('date_max')
                             +'\n'+feature.get('nb_rec'),
-                            offsetY: 30,
+                            offsetY: 40,
                             padding: [0.1, 0.1, 0.1, 0.1],
                             fill: new ol.style.Fill({ color: '#000' }),
                             stroke: new ol.style.Stroke({
@@ -924,7 +926,7 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
                         }),
                         text:new ol.style.Text({
                             font: '12px Calibri,sans-serif',
-                            text: "Cutlure été/hiver "+feature.get('culture été hiver')+" %"+
+                            text: "Culture été/hiver "+feature.get('culture été hiver')+" %"+
                             "\n"+"Forêt "+feature.get('forêt')+" %"+
                             "\n"+"Prairie "+feature.get('prairie')+" %"+
                             "\n"+"Urbain "+feature.get('urbain')+" %"+
@@ -1081,6 +1083,9 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
 
                         var layout = {
                             title:"Canton : "+titre,
+                            font: {
+                                family: "'Poppins', sans-serif"
+                            },
                             grid: {rows: 1, columns: 3, pattern: 'independent'},
                         };
                         Plotly.newPlot($("#graphFlowSimulated")[0], hist, layout)
@@ -1145,6 +1150,9 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
                         });
                         var layout = {
                             title: 'Répartition des cultures, sbv : '+feature.get('sbv')+ ' (info en ha)',
+                            font: {
+                                family: "'Poppins', sans-serif"
+                            },
                             annotations: annotations,
                             height: 400,
                             width: 1200,
@@ -1835,15 +1843,17 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
                     }
                 }
                 $("#divPopup1").append([
-                    "<div><label for='year-select'>Année du RPG:</label>",
+                    "<div class='blockRPG'><div class='titre_bottom' > Registre parcellaire graphique (RPG) </div>",
+                    "<div class='textRPG'><i class='fas fa-arrow-right'></i> Veuillez sélectionner le millésime RPG de référence dont les données seront ajoutées au référentiel</div>",
+                    "<div class='inputRPG'><label for='year-select'>Millésime du RPG de référence :</label><br>",
                     "<select name='year_rpg_wms' id='year_rpg_wms' onchange='mviewer.customControls.fluxExu.rpg_wms(this.value)'>",
                     "<option value='2019'>2019</option>",
                     "<option value='2018'>2018</option>",
                     "<option value='2017'>2017</option>",
                     "<option value='2016'>2016</option>",
                     "<option value='2015'>2015</option></select></div>",
-                    "<button class='btn_vert' onclick='mviewer.customControls.fluxExu.valider_rpg()'>Valider</button>",
-                    "<div>Veuillez sélectionner un sbv, pour afficher ses statistiques</div>"].join(""));
+                    "<button class='btnTNT btn_vert' onclick='mviewer.customControls.fluxExu.valider_rpg()'><i class='fas fa-plus-circle'></i> Ajouter</button>",
+                    "</div>"].join(""));   
                 data=[]
                 annotations=[]
                 decal=-0.2
@@ -1885,12 +1895,12 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
                             text: nameY,
                             x: decal,
                             y: 1.2},
-                            {font: {size: 15},
+                            {font: {size: 12},
                             showarrow: false,
                             text: surf,
                             x: decal,
                             y: 1.12},
-                            {font: {size: 15},
+                            {font: {size: 12},
                             showarrow: false,
                             text: parcelles,
                             x: decal,
@@ -1900,10 +1910,13 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
                     }
                 });
                 var layout = {
-                    title: 'Répartition des cultures, (info en ha)',
+                    title: 'Évolution de la répartition des cultures selon les catégories (en ha)',
                     annotations: annotations,
-                    height: 400,
-                    width: 1200,
+                    font: {
+                        family: "'Poppins', sans-serif"
+                    },
+                    height: 350,
+                    width: 1000,
                     showlegend: true,
                     grid: {rows: 1, columns: col_max+1}
                 };
@@ -1948,16 +1961,16 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
             }
 
             $("#divPopup1").append([
-                "<div class='titre_bottom' >Station qualité (NO3-) </div>",
-                "<div>Veuillez sélectionner sur la carte les stations qualités ",
-                "dont les enregistrements seront ajoutées au référentiel, SHIFT+CLIC : sélectionner plusieurs stations</div>",
-                "Estimation du nombre d'enregistrement à l'année : <6 6 à 11 > 12",
-                '<label class="input_long">Nombre d\'enregistrement minimum :<input type="text" id="seuil_rec" name="seuil_rec" value="10" size="4"></label>',
-                '<button style="color:white ;background-color: #2e5367;" onclick="mviewer.customControls.fluxExu.addQualityStation();">',
-                'Rechercher les stations</button>',
-                '<br><button class="btnTNT btn_vert" onclick="mviewer.customControls.fluxExu.ajout_station();">',
-                '<i class="fas fa-plus-circle"></i> Ajouter la sélection</button>'].join(''));
-            $("#graphFlowSimulated").append("<i>Sélectionnez une station sur la carte pour afficher les informations sur les flux d'azote associées</i>")
+                "<div class='blockEau'> <div class='titre_bottom' >Station qualité (NO3-) </div>",
+                    '<label class="input_long"><i class="fas fa-arrow-right"></i> Indiquez un nombre d\'enregistrement minimum :',
+                    '<input type="text" id="seuil_rec" name="seuil_rec" value="10" size="4"></label>',
+                    '<button class="btnTNT btn_vert2" onclick="mviewer.customControls.fluxExu.addQualityStation();">Afficher les stations</button>',
+                    "<div class='legendEau'>Estimation du nombre d'enregistrement à l'année : <br><img class='imgLegendStation' src='apps/mviewer-tnt/img/legend_station.svg'></div>",
+                    "<div class='textEau'> <i class='fas fa-arrow-right'></i> Veuillez sélectionner sur la carte les stations qualités dont les enregistrements seront ajoutés au référentiel.<br> SHIFT+CLIC : sélectionner plusieurs stations</div>",                    
+                    '<br><button class="btnTNT btn_vert" onclick="mviewer.customControls.fluxExu.ajout_station();">',
+                    '<i class="fas fa-plus-circle"></i> Ajouter la sélection</button></div>'].join(''));
+                    $("#graphFlowSimulated").append("<div class='blockNoData'><img class='imgNoData' src='apps/mviewer-tnt/img/data_nostation.svg'><p><i>Sélectionnez une station sur la carte pour afficher les informations associées</i></p></div>");
+                    $("#graphFlowSimulated").css("background-color","#80808012");            
         },
         addQualityStation: function(){
             if (_processing === false) {
