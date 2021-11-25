@@ -458,10 +458,19 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
                                     alert(outputTag.Data.LiteralData)
                                     $("#graphFlowSimulated").css("background-color","#ffffff");
                                     $("#divPopup1").append([
-                                        "<b style='padding-top:60px;font-size:20px' >Lien de téléchargement : </b>",
-                                        "<br><a href="+outputTag.Data.LiteralData+">"+outputTag.Data.LiteralData+ "</a>",
-                                        "<br><b style='padding-top:60px;font-size:20px' >Lien WMS : </b>",
-                                        "<br>http://psncalc.agrocampus-ouest.fr/tntserver/"+simulationName+"/wms"].join(""));
+                                        '<div id="blockDownlRef">',
+                                            '<div class="titre_bottom">Votre référentiel TNT a été créé avec succès !</div>',
+                                            '<div class="downlOptions getZip">',
+                                                '<div class="titleOptions">Lien de téléchargement</div>',
+                                                "<p>Télécharger l'ensemble des données (formatGeopackage) composant le référentiel au sein d'un dossier compressé</p>",
+                                                '<a class="downlLink" href='+outputTag.Data.LiteralData+'>'+outputTag.Data.LiteralData+'</a>',
+                                            '</div>',
+                                            '<div class="downlOptions getWMS">',
+                                                '<div class="titleOptions">Visualisation WMS</div>',
+                                                "<p>Visualiser l'ensemble des données (flux WMS) composant le référentiel au sein d'un outil cartographique</p>",
+                                                '<p class="downlLink">http://psncalc.agrocampus-ouest.fr/tntserver/'+simulationName+'/wms</p>',
+                                            '</div>',
+                                        '</div>',].join(""));
                                     _processing = false;
                                 }
                             }
@@ -1970,8 +1979,8 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
                     "<div class='textEau'> <i class='fas fa-arrow-right'></i> Veuillez sélectionner sur la carte les stations qualités dont les enregistrements seront ajoutés au référentiel.<br> SHIFT+CLIC : sélectionner plusieurs stations</div>",                    
                     '<br><button class="btnTNT btn_vert" onclick="mviewer.customControls.fluxExu.ajout_station();">',
                     '<i class="fas fa-plus-circle"></i> Ajouter la sélection</button></div>'].join(''));
-                    $("#graphFlowSimulated").append("<div class='blockNoData'><img class='imgNoData' src='apps/mviewer-tnt/img/data_nostation.svg'><p><i>Sélectionnez une station sur la carte pour afficher les informations associées</i></p></div>");
-                    $("#graphFlowSimulated").css("background-color","#80808012");            
+                $("#graphFlowSimulated").append("<div class='blockNoData'><img class='imgNoData' src='apps/mviewer-tnt/img/data_nostation.svg'><p><i>Sélectionnez une station sur la carte pour afficher les informations associées</i></p></div>");
+                $("#graphFlowSimulated").css("background-color","#80808012");            
         },
         addQualityStation: function(){
             if (_processing === false) {
