@@ -711,14 +711,14 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
                     return new ol.style.Style({
                         stroke: new ol.style.Stroke({
                             width: 2,
-                            color: "#1cb920"
+                            color: "black"
                         }),
                         fill: new ol.style.Fill({
                             //color: "rgba(191, 181, 192, 0.1)",
                             color: feature.get('color')
                         }),
                         text:new ol.style.Text({
-                            font: '12px Calibri,sans-serif',
+                            font: '12px Poppins,sans-serif',
                             text: feature.get('N_UCS').toString(),
                             fill: new ol.style.Fill({
                                 color: "black"
@@ -749,13 +749,13 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
                     return new ol.style.Style({
                         stroke: new ol.style.Stroke({
                             width: 2,
-                            color: "#1cb920"
+                            color: "grey"
                         }),
                         fill: new ol.style.Fill({
                             color: "rgba(191, 181, 192, 0.1)",
                         }),
                         text:new ol.style.Text({
-                            font: '12px Calibri,sans-serif',
+                            font: '12px Poppins,sans-serif',
                             text: feature.get('nom_geo'),
                             fill: new ol.style.Fill({
                                 color: "black"
@@ -795,7 +795,7 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
                             color: feature.get('color'),
                         }),
                         text:new ol.style.Text({
-                            font: '12px Calibri,sans-serif',
+                            font: '12px Poppins,sans-serif',
                             text: feature.get('rota_melange_1')+" --> "+feature.get('rota_melange_1_pct')+"%"+
                                 "\n"+feature.get('rota_melange_2')+" --> "+feature.get('rota_melange_2_pct')+"%"+
                                 "\n"+feature.get('rota_melange_3')+" --> "+feature.get('rota_melange_3_pct')+"%"
@@ -833,9 +833,9 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
                 name: "exutoireLayer",
                 style:  new ol.style.Style({
                     image: new ol.style.Circle({
-                        fill: new ol.style.Fill({color: 'rgba( 211, 158, 16, 0.1)'}),
-                        stroke: new ol.style.Stroke({color: 'black', width: 1.5}),
-                        radius: 3,
+                        fill: new ol.style.Fill({color: '#2c4153'}),
+                        stroke: new ol.style.Stroke({color: 'white', width: 1.5}),
+                        radius: 5,
 
                     })
                 })
@@ -856,13 +856,13 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
                     return new ol.style.Style({
                         stroke: new ol.style.Stroke({
                             width: 2,
-                            color: "#1cb920"
+                            color: "black"
                         }),
                         fill: new ol.style.Fill({
                             color: "rgba(191, 181, 192, 0.1)",
                         }),
                         text:new ol.style.Text({
-                            font: '12px Calibri,sans-serif',
+                            font: '12px Poppins,sans-serif',
                             text: feature.get('nom_geo'),
                             fill: new ol.style.Fill({
                                 color: "black"
@@ -929,13 +929,13 @@ La coordonnée indiquée possède une altitude inférieure à 0, aucune simulati
                     return new ol.style.Style({
                         stroke: new ol.style.Stroke({
                             width: 2,
-                            color: "#a10010"
+                            color: "black"
                         }),
                         fill: new ol.style.Fill({
                             color: "rgba(191, 181, 192, 0.05)",
                         }),
                         text:new ol.style.Text({
-                            font: '12px Calibri,sans-serif',
+                            font: '12px Poppins,sans-serif',
                             text: "Culture été/hiver "+feature.get('culture été hiver')+" %"+
                             "\n"+"Forêt "+feature.get('forêt')+" %"+
                             "\n"+"Prairie "+feature.get('prairie')+" %"+
